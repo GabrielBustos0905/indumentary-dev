@@ -59,7 +59,7 @@ export const login = async (req: Request, res: Response): Promise<any> => {
 
     const token = generateToken(user.id, user.userType)
 
-    console.log('user.userType:', user.userType)
+    // console.log('user.userType:', user.userType)
 
     res.cookie('token', token, {
       httpOnly: true,

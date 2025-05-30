@@ -28,35 +28,53 @@ export const getAllOrders = async (_req: Request, res: Response): Promise<any> =
 export const createOrder = async (req: Request, res: Response): Promise<any> => {
   const result = createOrderSchema.safeParse(req.body)
 
-  if (!result.success) return res.status(400).json({ error: result.error.flatten() })
+  if (!result.success) {
+    return res.status(400).json({ error: result.error.flatten() })
+  }
 
-  const { items, userId } = result.data
+  const { items } = result.data
+  const userId = req.user?.id
+
+  if (userId == null) {
+    return res.status(401).json({ error: 'No autorizado' })
+  }
 
   try {
-    // Validamos que el usuario exista
     const user = await prisma.user.findUnique({
       where: { id: userId }
     })
 
-    if (user == null) return res.status(404).json({ error: 'Usuario no encontrado' })
+    if (user == null) {
+      return res.status(404).json({ error: 'Usuario no encontrado' })
+    }
 
-    // Validamos que todos los productos existan
     const productsId = items.map(item => item.productId)
     const products = await prisma.product.findMany({
       where: {
-        id: {
-          in: productsId
-        }
+        id: { in: productsId }
       }
     })
 
-    if (products.length !== productsId.length) return res.status(404).json({ error: 'Uno o mas productos no existen' })
+    if (products.length !== productsId.length) {
+      return res.status(404).json({ error: 'Uno o más productos no existen' })
+    }
 
-    // Calculamos el total (usando el precio actual u oferta si hay)
     let total = 0
+
     const orderItemsData = items.map(item => {
       const product = products.find(p => p.id === item.productId)
-      const unitPrice = product?.offer ?? product?.price ?? 0
+
+      if (product == null) throw new Error('Producto no encontrado internamente')
+
+      if (!product.availableSizes.includes(item.size)) {
+        throw new Error(`Talle ${item.size} no disponible para el producto ${product.name}`)
+      }
+
+      if (product.stock < item.quantity) {
+        throw new Error(`No hay suficiente stock para el producto ${product.name}`)
+      }
+
+      const unitPrice = product.offer ?? product.price
       total += unitPrice * item.quantity
 
       return {
@@ -67,22 +85,38 @@ export const createOrder = async (req: Request, res: Response): Promise<any> => 
       }
     })
 
-    // Creamos la orden con loss items
-    const order = await prisma.order.create({
-      data: {
-        userId,
-        total,
-        items: {
-          create: orderItemsData
+    const order = await prisma.$transaction(async (tx) => {
+      // Actualizar stock
+      await Promise.all(
+        items.map(async item => {
+          await tx.product.update({
+            where: { id: item.productId },
+            data: {
+              stock: {
+                decrement: item.quantity
+              }
+            }
+          })
+        })
+      )
+
+      // Crear orden con items
+      return await tx.order.create({
+        data: {
+          userId,
+          total,
+          items: {
+            create: orderItemsData
+          }
+        },
+        include: {
+          items: true
         }
-      },
-      include: {
-        items: true
-      }
+      })
     })
 
     return res.status(200).json(order)
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error al crear orden:', error)
     return res.status(500).json({ error: 'Error interno del servidor' })
   }

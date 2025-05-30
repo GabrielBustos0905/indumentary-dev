@@ -6,8 +6,8 @@ const router = Router()
 
 router.get('/', getAllProduts)
 router.get('/:id', getProductById)
-router.post('/', protect, createProduct)
-router.put('/:id', protect, updateProduct)
-router.delete('/:id', protect, deleteProduct)
+router.post('/', protect(['ADMIN']), createProduct)
+router.put('/:id', protect(['ADMIN']), updateProduct)
+router.delete('/:id', protect(['ADMIN']), deleteProduct)
 
 export default router

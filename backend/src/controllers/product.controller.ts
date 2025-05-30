@@ -1,21 +1,82 @@
 import { type Request, type Response } from 'express'
 import prisma from '../lib/prisma'
+import { type Prisma } from '@prisma/client'
 import { createProductSchema, updateProductSchema } from '../schemas/product.schema'
 import slugify from 'slugify'
 
-export const getAllProduts = async (_req: Request, res: Response): Promise<any> => {
+export const getAllProduts = async (req: Request, res: Response): Promise<any> => {
   try {
-    const allProducts = await prisma.product.findMany({
-      include: {
-        images: true,
-        type: true
-      },
-      orderBy: {
-        createdAt: 'desc'
-      }
-    })
+    const {
+      type,
+      size,
+      minPrice,
+      maxPrice,
+      q,
+      sort,
+      page = 1,
+      perPage = 12
+    } = req.query
 
-    return res.status(200).json(allProducts)
+    // 👇 Construcción dinámica de filtros
+    const priceFilter: any = {}
+    if (minPrice != null) priceFilter.gte = Number(minPrice)
+    if (maxPrice != null) priceFilter.lte = Number(maxPrice)
+
+    const filters: Prisma.ProductWhereInput = {
+      ...(type != null && {
+        type: { name: { equals: String(type), mode: 'insensitive' } }
+      }),
+      ...(size != null && { availableSizes: { has: String(size) } }),
+      ...(Object.keys(priceFilter != null).length > 0 && { price: priceFilter }),
+      ...(q != null && {
+        OR: [
+          { name: { contains: String(q), mode: 'insensitive' } },
+          { description: { contains: String(q), mode: 'insensitive' } }
+        ]
+      })
+    }
+
+    // 👇 Ordenamiento seguro con cast a SortOrder
+    const orderBy: Prisma.ProductOrderByWithRelationInput = (() => {
+      switch (sort) {
+        case 'price_asc':
+          return { price: 'asc' as Prisma.SortOrder }
+        case 'price_desc':
+          return { price: 'desc' as Prisma.SortOrder }
+        case 'name_asc':
+          return { name: 'asc' as Prisma.SortOrder }
+        case 'name_desc':
+          return { name: 'desc' as Prisma.SortOrder }
+        default:
+          return { createdAt: 'desc' as Prisma.SortOrder }
+      }
+    })()
+
+    // 👇 Paginación
+    const take = Number(perPage)
+    const skip = (Number(page) - 1) * take
+
+    const [products, total] = await Promise.all([
+      prisma.product.findMany({
+        where: filters,
+        orderBy,
+        skip,
+        take,
+        include: {
+          images: true,
+          type: true
+        }
+      }),
+      prisma.product.count({ where: filters })
+    ])
+
+    return res.status(200).json({
+      data: products,
+      total,
+      page: Number(page),
+      perPage: take,
+      totalPages: Math.ceil(total / take)
+    })
   } catch (error) {
     console.error('Error al obtener productos:', error)
     res.status(500).json({ error: 'Error interno del servidor' })

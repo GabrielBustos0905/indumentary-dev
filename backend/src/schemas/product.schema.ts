@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-const SizeEnum = z.enum(['XS', 'S', 'M', 'L', 'XL'])
+const SizeEnum = z.enum(['XS', 'S', 'M', 'L', 'XL', '40', '41', '42', '43'])
 
 export const createProductSchema = z.object({
   name: z.string().min(1, 'El nombre es requerido'),

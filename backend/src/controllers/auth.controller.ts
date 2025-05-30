@@ -40,7 +40,16 @@ export const login = async (req: Request, res: Response): Promise<any> => {
 
     const { email, password } = result.data
 
-    const user = await prisma.user.findUnique({ where: { email } })
+    const user = await prisma.user.findUnique({
+      where: { email },
+      select: {
+        id: true,
+        password: true,
+        userType: true,
+        email: true,
+        name: true
+      }
+    })
 
     if (user?.password == null) return res.status(400).json({ message: 'Credenciales inválidas' })
 
@@ -48,7 +57,9 @@ export const login = async (req: Request, res: Response): Promise<any> => {
 
     if (!isPasswordCorrect) return res.status(400).json({ message: 'Contraseña incorrecta' })
 
-    const token = generateToken(user.id)
+    const token = generateToken(user.id, user.userType)
+
+    console.log('user.userType:', user.userType)
 
     res.cookie('token', token, {
       httpOnly: true,

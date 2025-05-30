@@ -4,8 +4,8 @@ import { protect } from '../middlewares/auth.middleware'
 
 const router = Router()
 
-router.get('/', getUsers)
-router.get('/me', protect, getProfile)
+router.get('/', protect(['ADMIN']), getUsers)
+router.get('/me', protect(), getProfile)
 // router.get('/:id')
 
 export default router

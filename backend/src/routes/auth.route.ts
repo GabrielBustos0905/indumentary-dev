@@ -16,7 +16,7 @@ router.get('/google/callback',
   passport.authenticate('google', { session: false }) as RequestHandler,
   (req: any, res) => {
     const user = req.user
-    const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '7d' })
+    const token = jwt.sign({ userId: user.id, userType: 'CLIENT' }, JWT_SECRET, { expiresIn: '7d' })
 
     // Mandar cookie
     res.cookie('token', token, {

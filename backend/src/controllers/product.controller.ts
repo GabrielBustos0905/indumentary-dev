@@ -13,6 +13,7 @@ export const getAllProduts = async (req: Request, res: Response): Promise<any> =
       maxPrice,
       q,
       sort,
+      isFeatured,
       page = 1,
       perPage = 12
     } = req.query
@@ -27,6 +28,7 @@ export const getAllProduts = async (req: Request, res: Response): Promise<any> =
         type: { name: { equals: String(type), mode: 'insensitive' } }
       }),
       ...(size != null && { availableSizes: { has: String(size) } }),
+      ...(isFeatured != null && { isFeatured: isFeatured === 'true' }),
       ...(Object.keys(priceFilter != null).length > 0 && { price: priceFilter }),
       ...(q != null && {
         OR: [

@@ -1,5 +1,11 @@
+import { Metadata } from "next";
 import "../globals.css"
 import { AuthBanner } from "@/components/Auth";
+
+export const metadata: Metadata = {
+    title: "Indumentary Dev - Autenticacion 🔐",
+    description: "",
+};
 
 export default function AuthLayout({
     children,

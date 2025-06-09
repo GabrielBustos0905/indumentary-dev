@@ -14,7 +14,7 @@ export function Header({ label }: HeaderPops) {
     return (
         <div className="w-full flex flex-col gap-y-4 items-center justify-center">
             <h1 className={cn("text-3xl font-semibold flex items-center gap-2", font.className)}>
-                🔐 Registrarse
+                🔐 Indumentary Dev
             </h1>
             <p className="text-muted-foreground text-sm">{label}</p>
         </div>

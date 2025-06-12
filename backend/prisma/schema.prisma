@@ -26,14 +26,15 @@ enum OrderStatus {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
+  id        String     @id @default(uuid())
+  email     String     @unique
   name      String
-  password  String?  @db.Text
-  userType  UserRole @default(CLIENT)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  password  String?    @db.Text
+  userType  UserRole   @default(CLIENT)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   Order     Order[]
+  Favorite  Favorite[]
 }
 
 model Product {
@@ -56,6 +57,7 @@ model Product {
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   OrderItem OrderItem[]
+  Favorite  Favorite[]
 }
 
 model ProductImage {
@@ -67,10 +69,11 @@ model ProductImage {
 }
 
 model ProductType {
-  id       String    @id @default(uuid())
-  name     String    @unique
-  imageUrl String? // imagen para representar la categoría
-  products Product[]
+  id          String    @id @default(uuid())
+  name        String    @unique
+  description String
+  imageUrl    String? // imagen para representar la categoría
+  products    Product[]
 }
 
 model Order {
@@ -96,4 +99,15 @@ model OrderItem {
   size      String // Ej: "M", "L"
   quantity  Int
   unitPrice Float // Precio en ese momento (con o sin oferta)
+}
+
+model Favorite {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
 }

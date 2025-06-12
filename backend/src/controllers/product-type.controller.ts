@@ -16,7 +16,7 @@ export const createProductType = async (req: Request, res: Response): Promise<an
 
   if (!result.success) return res.status(400).json({ error: result.error.format() })
 
-  const { name, imageUrl } = result.data
+  const { name, imageUrl, description } = result.data
   try {
     const exists = await prisma.productType.findUnique({
       where: {
@@ -29,6 +29,7 @@ export const createProductType = async (req: Request, res: Response): Promise<an
     const newType = await prisma.productType.create({
       data: {
         name,
+        description,
         imageUrl
       }
     })

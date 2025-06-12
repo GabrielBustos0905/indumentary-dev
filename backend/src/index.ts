@@ -14,6 +14,7 @@ import authRoute from './routes/auth.route'
 import productTypeRoute from './routes/product-type.route'
 import productRoute from './routes/product.route'
 import orderRoute from './routes/order.route'
+import favoriteRoute from "./routes/favorite.route"
 // --------------------------
 
 dotenv.config()
@@ -46,6 +47,7 @@ app.use('/auth', authRoute)
 app.use('/product-type', productTypeRoute)
 app.use('/product', productRoute)
 app.use('/order', orderRoute)
+app.use('/favorite', favoriteRoute)
 // ----------------------------
 
 const PORT = process.env.PORT ?? 3000

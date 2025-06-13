@@ -17,7 +17,7 @@ export function ProductCard({ product }: { product: Product }) {
             <CardContent className="relative flex flex-col justify-center px-1 py-1">
                 <div className="relative overflow-hidden">
                     <Image
-                        src={``}
+                        src={"/tu imagen"}
                         alt="Product image"
                         className="h-[363px]"
                         width={60}
@@ -27,7 +27,7 @@ export function ProductCard({ product }: { product: Product }) {
                         {
                             product.images[1].url && (
                                 <Image
-                                    src={``}
+                                    src={`/tu imagen`}
                                     alt="Product image"
                                     className="h-[363px]"
                                     width={60}

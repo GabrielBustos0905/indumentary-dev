@@ -22,7 +22,8 @@ export const getProfile = async (req: Request, res: Response): Promise<any> => {
         id: true,
         email: true,
         name: true,
-        createdAt: true
+        createdAt: true,
+        userType: true
       }
     })
 

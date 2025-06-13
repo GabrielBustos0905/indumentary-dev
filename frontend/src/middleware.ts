@@ -9,17 +9,17 @@ export function middleware(req: NextRequest) {
   // const isPublicRoute = publicRoutes.includes(pathname);
   // const isAuthRoute = authRoutes.includes(pathname);
 
-  // // Decodificar el token para obtener el userType
-  // let userType: string | null = null;
+  // Decodificar el token para obtener el userType
+  let userType: string | null = null;
 
-  // if (token) {
-  //   try {
-  //     const payload = JSON.parse(atob(token.split('.')[1]));
-  //     userType = payload.userType;
-  //   } catch (err) {
-  //     console.error('Token inválido', err);
-  //   }
-  // }
+  if (token) {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      userType = payload.userType;
+    } catch (err) {
+      console.error('Token inválido', err);
+    }
+  }
 
   // console.log({"user": userType})
 
@@ -40,11 +40,11 @@ export function middleware(req: NextRequest) {
   // }
 
   // return NextResponse.next();
-  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
-  const isAuthRoute = authRoutes.includes(nextUrl.pathname);
+  const isPublicRoute = publicRoutes.includes(pathname);
+  const isAuthRoute = authRoutes.includes(pathname);
 
   if(isAuthRoute) {
-    if(token) return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
+    if(token) return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
     return
   };
   
@@ -57,6 +57,10 @@ export function middleware(req: NextRequest) {
 
     return Response.redirect(new URL(`/auth/login?callbackUrl=${encodeCallbackUrl}`, nextUrl));
   };
+
+  if(pathname.startsWith("/admin") && userType !== "ADMIN") {
+    return NextResponse.redirect(new URL('/unauthorized', nextUrl))
+  }
 
   return
 }

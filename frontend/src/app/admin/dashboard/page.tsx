@@ -1,7 +1,7 @@
+import { Dashboard } from "@/components/Admin";
+
 export default function DashboardPage() {
     return (
-        <div>
-            Hola dashboard
-        </div>
+        <Dashboard />
     )
 }

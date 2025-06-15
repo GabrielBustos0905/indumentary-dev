@@ -74,7 +74,10 @@ export const createOrder = async (req: Request, res: Response): Promise<any> => 
         throw new Error(`No hay suficiente stock para el producto ${product.name}`)
       }
 
-      const unitPrice = product.offer ?? product.price
+      const unitPrice = product.offer
+        ? product.price * (1 - product.offer / 100)
+        : product.price
+
       total += unitPrice * item.quantity
 
       return {

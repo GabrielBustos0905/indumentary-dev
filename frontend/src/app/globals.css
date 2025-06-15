@@ -3,7 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-
 @layer utilities {
   @keyframes marquee {
     0% {
@@ -37,7 +36,6 @@
     animation-play-state: paused;
   }
 }
-
 
 @theme inline {
   --color-background: var(--background);

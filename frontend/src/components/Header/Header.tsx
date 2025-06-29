@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { MenuList } from "./MenuList";
-import { ShoppingCart, User } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { Dancing_Script } from "next/font/google";
 import { UserNav } from "./UserNav";
 

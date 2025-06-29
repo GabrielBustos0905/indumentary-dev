@@ -7,7 +7,7 @@ import slugify from 'slugify'
 export const getAllProduts = async (req: Request, res: Response): Promise<any> => {
   try {
     const {
-      type,
+      typeId,
       size,
       minPrice,
       maxPrice,
@@ -24,16 +24,16 @@ export const getAllProduts = async (req: Request, res: Response): Promise<any> =
     if (maxPrice != null) priceFilter.lte = Number(maxPrice)
 
     const filters: Prisma.ProductWhereInput = {
-      ...(type != null && {
-        type: { name: { equals: String(type), mode: 'insensitive' } }
+      ...(typeId != null && typeId !== "all" && {
+        type: { name: { equals: String(typeId), mode: 'insensitive' } }
       }),
-      ...(size != null && { availableSizes: { has: String(size) } }),
-      ...(isFeatured != null && { isFeatured: isFeatured === 'true' }),
-      ...(Object.keys(priceFilter != null).length > 0 && { price: priceFilter }),
+      ...(size != null && size !== "all" && { availableSizes: { has: String(size) } }),
+      ...(isFeatured != null && isFeatured !== "all" && { isFeatured: isFeatured === 'true' }),
+      ...(Object.keys(priceFilter).length > 0 && { price: priceFilter }),
       ...(q != null && {
         OR: [
           { name: { contains: String(q), mode: 'insensitive' } },
-          { description: { contains: String(q), mode: 'insensitive' } }
+          // { description: { contains: String(q), mode: 'insensitive' } }
         ]
       })
     }
@@ -42,15 +42,15 @@ export const getAllProduts = async (req: Request, res: Response): Promise<any> =
     const orderBy: Prisma.ProductOrderByWithRelationInput = (() => {
       switch (sort) {
         case 'price_asc':
-          return { price: 'asc' as Prisma.SortOrder }
+          return { price: 'asc' }
         case 'price_desc':
-          return { price: 'desc' as Prisma.SortOrder }
+          return { price: 'desc' }
         case 'name_asc':
-          return { name: 'asc' as Prisma.SortOrder }
+          return { name: 'asc' }
         case 'name_desc':
-          return { name: 'desc' as Prisma.SortOrder }
+          return { name: 'desc' }
         default:
-          return { createdAt: 'desc' as Prisma.SortOrder }
+          return { createdAt: 'desc' }
       }
     })()
 

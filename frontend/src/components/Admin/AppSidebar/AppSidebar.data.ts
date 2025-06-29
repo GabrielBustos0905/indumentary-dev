@@ -56,23 +56,23 @@ export const data = {
             items: [
                 {
                     title: "Productos",
-                    url: "#",
+                    url: "/products",
                 },
                 {
                     title: "Tipo de Producto",
-                    url: "#",
+                    url: "/product-type",
                 },
                 {
                     title: "Ordenes",
-                    url: "#",
+                    url: "/orders",
                 },
                 {
                     title: "Favoritos",
-                    url: "#"
+                    url: "/favorites"
                 },
                 {
                     title: "Usuarios",
-                    url: "#"
+                    url: "/users"
                 }
             ],
         },

@@ -1,5 +1,9 @@
 export type ProductResponse = {
   data: Product[];
+  total: number;
+  page: number;
+  perPage: number;
+  totalPages: number
 };
 
 export type ProductImage = {
@@ -30,3 +34,9 @@ export type Product = {
   createdAt: string; // o Date, dependiendo de si lo parseás
   updatedAt: string;
 };
+
+export type ProductCreateInput = Omit<Product, "id" | "slug" | "createdAt" | "updatedAt" | "type"> & {
+  images: { url: string }[]
+}
+
+export type ProductUpdateInput = Partial<ProductCreateInput>

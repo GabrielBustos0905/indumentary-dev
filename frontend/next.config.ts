@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
         hostname: "res.cloudinary.com",
         port: "",
         pathname: "/**"
+      },
+      {
+        protocol: "https",
+        hostname: "unsplash.com",
+        port: "",
+        pathname: "/**"
       }
     ]
   }

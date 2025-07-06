@@ -8,8 +8,10 @@ export function ProductSection() {
     return (
         <ProductProvider>
             <ProductFilters />
-            <ProductSearch />
-            <CreateProduct />
+            <div className="flex items-center gap-4">
+                <ProductSearch />
+                <CreateProduct />
+            </div>
             <ProductTable />
         </ProductProvider>
     )

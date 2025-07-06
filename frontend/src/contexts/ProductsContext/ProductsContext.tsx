@@ -25,6 +25,7 @@ interface ProductContextType {
     perPage: number
     totalPages: number
     loading: boolean
+    reloadProducts: () => void
     error: string | null
     filters: Record<string, unknown>
     setFilters: (filters: Record<string, unknown>) => void
@@ -51,7 +52,6 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     })
     const [types, setTypes] = useState<ProductType[]>([])
 
-
     const fetchAllProducts = useCallback(async () => {
         setLoading(true)
         try {
@@ -68,6 +68,8 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
             setLoading(false)
         }
     }, [filters])
+
+    const reloadProducts = () => fetchAllProducts()
 
     const create = async (productData: ProductCreateInput) => {
         await createProduct(productData)
@@ -107,6 +109,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
                 perPage,
                 totalPages,
                 loading,
+                reloadProducts,
                 error,
                 filters,
                 setFilters,

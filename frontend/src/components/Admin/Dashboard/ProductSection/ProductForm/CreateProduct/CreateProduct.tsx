@@ -18,7 +18,7 @@ export function CreateProduct() {
             <DialogContent aria-describedby="Add product" className="max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
                     <DialogTitle>Añadir un producto nuevo</DialogTitle>
-                    <CreateProductForm />
+                    <CreateProductForm closeDialog={setOpenDialog} />
                 </DialogHeader>
             </DialogContent>
         </Dialog>

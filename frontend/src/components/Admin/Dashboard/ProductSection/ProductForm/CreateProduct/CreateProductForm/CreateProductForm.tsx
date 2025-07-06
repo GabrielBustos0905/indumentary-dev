@@ -1,3 +1,6 @@
+import { createProduct } from "@/actions/product";
+import { FormError } from "@/components/Auth/FormError";
+import { FormSuccess } from "@/components/Auth/FormSuccess";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -9,16 +12,24 @@ import { createProductSchema } from "@/schemas/product.schema";
 import { uploadImage } from "@/services/cloudinary";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 // Lista de talles posibles
 const sizes = ["XS", "S", "M", "L", "XL", "38", "39", "40", "41", "42", "43"];
 
-export function CreateProductForm() {
-    const { types } = useProduct();
+interface CreateProductFormProps {
+    closeDialog: (open: boolean) => void;
+}
+
+export function CreateProductForm(props: CreateProductFormProps) {
+    const { closeDialog } = props;
+
+    const { types, reloadProducts } = useProduct();
     const [isPending, startTransition] = useTransition();
+    const [error, setError] = useState<string | undefined>("");
+    const [success, setSuccess] = useState<string | undefined>("");
 
     const form = useForm<z.infer<typeof createProductSchema>>({
         resolver: zodResolver(createProductSchema),
@@ -37,9 +48,17 @@ export function CreateProductForm() {
 
     const onSubmit = (values: z.infer<typeof createProductSchema>) => {
         startTransition(() => {
-            console.log(values)
+            createProduct(values)
+                .then((data) => {
+                    setError(data.error);
+                    setSuccess(data.success)
+                });
+
+            closeDialog(false);
+            form.reset();
+            reloadProducts();
         })
-    }
+    };
 
     return (
         <div className="grid gap-4 py-4">
@@ -298,6 +317,8 @@ export function CreateProductForm() {
                         )} />
                     </div>
 
+                    <FormError message={error} />
+                    <FormSuccess message={success} />
                     <Button type="submit" className="w-full cursor-pointer">
                         Añadir producto
                     </Button>

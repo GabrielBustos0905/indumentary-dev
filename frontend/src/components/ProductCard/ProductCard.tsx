@@ -17,9 +17,9 @@ export function ProductCard({ product }: { product: Product }) {
             <CardContent className="relative flex flex-col justify-center px-1 py-1">
                 <div className="relative overflow-hidden">
                     <Image
-                        src={"/tu imagen"}
+                        src={product.images[0].url}
                         alt="Product image"
-                        className="h-[363px]"
+                        className="h-[363px] w-full"
                         width={60}
                         height={60}
                     />
@@ -38,7 +38,7 @@ export function ProductCard({ product }: { product: Product }) {
                     </div> */}
                 </div>
                 {
-                    product.offer !== null && (
+                    product.offer !== null && product.offer > 0 && (
                         <div className="absolute top-2 left-2">
                             <Badge variant={"destructive"}>OFF  -%{product.offer}</Badge>
                         </div>

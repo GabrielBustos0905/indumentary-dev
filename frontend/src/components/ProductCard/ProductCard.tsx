@@ -1,7 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
 import { cuotas, discount, formatPrice } from "@/lib/format-price";
 import { Product } from "@/types/product";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
@@ -16,26 +16,23 @@ export function ProductCard({ product }: { product: Product }) {
         <Card key={product.slug} className="py-1 w-[250px] shadow-none border-none cursor-pointer" onClick={() => router.push(`/product/${product.slug}`)}>
             <CardContent className="relative flex flex-col justify-center px-1 py-1">
                 <div className="relative overflow-hidden">
-                    <Image
+                    <img
                         src={product.images[0].url}
                         alt="Product image"
                         className="h-[363px] w-full"
-                        width={60}
-                        height={60}
                     />
-                    {/* <div className="absolute h-full w-full bg-black/20 flex items-center justify-center bottom-0  group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                        {
-                            product.images[1].url && (
-                                <Image
-                                    src={`/tu imagen`}
+                    {
+                        product.images.length > 1 && (
+                            <div className="absolute h-full w-full bg-black/20 flex items-center justify-center bottom-0  group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                <img
+                                    src={product.images[1].url}
                                     alt="Product image"
                                     className="h-[363px]"
-                                    width={60}
-                                    height={60}
                                 />
-                            )
-                        }
-                    </div> */}
+
+                            </div>
+                        )
+                    }
                 </div>
                 {
                     product.offer !== null && product.offer > 0 && (

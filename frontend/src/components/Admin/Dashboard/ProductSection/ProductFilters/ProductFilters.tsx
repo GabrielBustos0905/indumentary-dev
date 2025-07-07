@@ -17,7 +17,7 @@ export const ProductFilters = () => {
         setFilters({
             ...filters,
             typeId: selectedType || null,
-            isFeatured: selectedFeatured === "" ? undefined : selectedFeatured === "true",
+            isFeatured: selectedFeatured || undefined,
             size: selectedSize || undefined,
             page: 1,
         })

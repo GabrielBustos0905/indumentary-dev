@@ -33,7 +33,7 @@ export const updateProductSchema = z.object({
 
   typeId: z.string().uuid().optional(),
 
-  availableSizes: z.array(SizeEnum).optional(),
+  availableSizes: z.array(z.string()).nonempty('Debe haber al menos una talla válida'),
 
   images: z.array(z.object({
     url: z.string().url()

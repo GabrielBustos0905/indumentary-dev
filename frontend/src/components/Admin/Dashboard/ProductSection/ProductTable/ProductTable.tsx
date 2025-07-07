@@ -9,8 +9,9 @@ import {
     TableRow
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { Pencil, Trash } from "lucide-react"
+import { Trash } from "lucide-react"
 import { useProduct } from "@/contexts/ProductsContext/ProductsContext"
+import { UpdateProduct } from "../ProductForm"
 
 
 export function ProductTable() {
@@ -57,13 +58,7 @@ export function ProductTable() {
                                         : "-"}
                                 </TableCell>
                                 <TableCell className="text-right space-x-2">
-                                    <Button
-                                        size="sm"
-                                        variant="outline"
-                                        onClick={() => { }}
-                                    >
-                                        <Pencil className="h-4 w-4" />
-                                    </Button>
+                                    <UpdateProduct product={product} />
                                     <Button
                                         size="sm"
                                         variant="destructive"

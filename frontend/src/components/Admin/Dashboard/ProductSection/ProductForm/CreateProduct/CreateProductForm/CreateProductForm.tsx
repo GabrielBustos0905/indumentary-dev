@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { createProduct } from "@/actions/product";
 import { FormError } from "@/components/Auth/FormError";
 import { FormSuccess } from "@/components/Auth/FormSuccess";
@@ -11,7 +12,6 @@ import { useProduct } from "@/contexts/ProductsContext/ProductsContext";
 import { createProductSchema } from "@/schemas/product.schema";
 import { uploadImage } from "@/services/cloudinary";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -54,9 +54,8 @@ export function CreateProductForm(props: CreateProductFormProps) {
                     setSuccess(data.success)
                 });
 
-            closeDialog(false);
-            form.reset();
             reloadProducts();
+            closeDialog(false);
         })
     };
 
@@ -284,13 +283,7 @@ export function CreateProductForm(props: CreateProductFormProps) {
                                         <div className="flex flex-wrap gap-2 mt-2">
                                             {field.value.map((img, idx) => (
                                                 <div key={idx} className="relative group">
-                                                    <Image
-                                                        src={img.url}
-                                                        alt="Preview"
-                                                        width={96}
-                                                        height={110}
-                                                        className="object-cover rounded"
-                                                    />
+                                                    <img src={img.url} alt="Preview" className="w-24 h-24 object-cover rounded" />
                                                     <button
                                                         type="button"
                                                         className="absolute top-1 right-1 bg-red-500 text-white text-xs p-1 rounded-full opacity-0 group-hover:opacity-100 transition"
@@ -319,7 +312,7 @@ export function CreateProductForm(props: CreateProductFormProps) {
 
                     <FormError message={error} />
                     <FormSuccess message={success} />
-                    <Button type="submit" className="w-full cursor-pointer">
+                    <Button type="submit" className="w-full cursor-pointer" disabled={isPending}>
                         Añadir producto
                     </Button>
                 </form>

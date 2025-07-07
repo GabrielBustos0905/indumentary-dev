@@ -8,10 +8,8 @@ import {
     TableHeader,
     TableRow
 } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import { Trash } from "lucide-react"
 import { useProduct } from "@/contexts/ProductsContext/ProductsContext"
-import { UpdateProduct } from "../ProductForm"
+import { DeleteProduct, UpdateProduct } from "../ProductForm"
 
 
 export function ProductTable() {
@@ -59,13 +57,7 @@ export function ProductTable() {
                                 </TableCell>
                                 <TableCell className="text-right space-x-2">
                                     <UpdateProduct product={product} />
-                                    <Button
-                                        size="sm"
-                                        variant="destructive"
-                                        onClick={() => { }}
-                                    >
-                                        <Trash className="h-4 w-4" />
-                                    </Button>
+                                    <DeleteProduct productId={product.id} />
                                 </TableCell>
                             </TableRow>
                         ))

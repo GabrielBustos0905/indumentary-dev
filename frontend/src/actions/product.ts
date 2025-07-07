@@ -74,3 +74,28 @@ export const updateProduct = async (id: string, values: z.infer<typeof updatePro
     };
 };
 
+export const deleteProduct = async (id: string) => {
+    try {
+        console.log(id)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/${id}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            const message = data?.message ?? data?.error ?? 'Error al eliminar el producto';
+            return { error: message };
+        }
+
+        return { success: data?.message ?? 'Producto eliminado exitosamente' };
+
+    } catch (error) {
+        console.error('Error eliminando producto:', error);
+        return { error: 'Error inesperado al intentar eliminar el producto' };
+    }
+};
+
+

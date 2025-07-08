@@ -69,7 +69,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
         }
     }, [filters])
 
-    const reloadProducts = async () => await fetchAllProducts()
+    const reloadProducts = async () => await fetchProducts()
 
     const create = async (productData: ProductCreateInput) => {
         await createProduct(productData)

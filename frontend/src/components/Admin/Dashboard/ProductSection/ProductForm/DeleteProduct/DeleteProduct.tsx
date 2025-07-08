@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Trash } from "lucide-react"
 import { useState } from "react";
+import { toast } from "sonner";
 
 export function DeleteProduct({ productId }: { productId: string }) {
     const [openDialog, setOpenDialog] = useState(false);
@@ -12,6 +13,7 @@ export function DeleteProduct({ productId }: { productId: string }) {
     const onRemove = () => {
         deleteProduct(productId);
         setOpenDialog(false)
+        toast.warning("Producto eliminado!")
     };
 
     return (

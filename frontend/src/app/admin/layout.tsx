@@ -4,6 +4,7 @@ import "../globals.css";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { AppSidebar } from "@/components/Admin";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function AdminLayout({
                     </SidebarInset>
                     <main className="w-full mt-8">
                         {children}
+                        <Toaster />
                     </main>
                 </SidebarProvider>
             </body>

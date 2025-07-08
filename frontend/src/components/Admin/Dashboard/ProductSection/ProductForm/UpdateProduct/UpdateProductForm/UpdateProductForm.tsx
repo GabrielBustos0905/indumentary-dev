@@ -17,6 +17,7 @@ import { Product } from "@/types/product";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const sizes = ["XS", "S", "M", "L", "XL", "38", "39", "40", "41", "42", "43"];
@@ -59,7 +60,7 @@ export function UpdateProductForm({ closeDialog, product }: UpdateProductFormPro
                     setError(data.error);
                     setSuccess(data.success)
                 });
-
+            toast.success("Producto actualizado!")
             reloadProducts();
             closeDialog(false);
         })

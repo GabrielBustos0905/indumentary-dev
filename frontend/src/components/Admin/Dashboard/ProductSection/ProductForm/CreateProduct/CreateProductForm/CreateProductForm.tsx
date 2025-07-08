@@ -14,6 +14,7 @@ import { uploadImage } from "@/services/cloudinary";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 // Lista de talles posibles
@@ -55,6 +56,7 @@ export function CreateProductForm(props: CreateProductFormProps) {
                 });
 
             reloadProducts();
+            toast.success("Producto añadido!")
             closeDialog(false);
         })
     };

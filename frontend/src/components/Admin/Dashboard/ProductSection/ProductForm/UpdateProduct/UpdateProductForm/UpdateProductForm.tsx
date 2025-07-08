@@ -57,13 +57,23 @@ export function UpdateProductForm({ closeDialog, product }: UpdateProductFormPro
         startTransition(() => {
             updateProduct(product.id, values)
                 .then((data) => {
-                    setError(data.error);
-                    setSuccess(data.success)
+                    if (data?.error) {
+                        setError(data.error);
+                        toast.error(data.error);
+                        return;
+                    }
+
+                    setSuccess(data.success);
+                    toast.success("Producto actualizado!");
+
+                    reloadProducts(); // ✅ ahora sí se actualiza después del éxito
+                    closeDialog(false); // ✅ cerramos después de todo
+                })
+                .catch((err) => {
+                    console.error("Error actualizando producto", err);
+                    toast.error("Ocurrió un error al actualizar el producto");
                 });
-            toast.success("Producto actualizado!")
-            reloadProducts();
-            closeDialog(false);
-        })
+        });
     };
 
     return (

@@ -51,15 +51,25 @@ export function CreateProductForm(props: CreateProductFormProps) {
         startTransition(() => {
             createProduct(values)
                 .then((data) => {
-                    setError(data.error);
-                    setSuccess(data.success)
-                });
+                    if (data?.error) {
+                        setError(data.error);
+                        toast.error(data.error);
+                        return;
+                    }
 
-            reloadProducts();
-            toast.success("Producto añadido!")
-            closeDialog(false);
-        })
+                    setSuccess(data.success);
+                    toast.success("Producto añadido!");
+
+                    reloadProducts(); // ✅ solo se llama si todo salió bien
+                    closeDialog(false);
+                })
+                .catch((err) => {
+                    console.error("Error creando producto", err);
+                    toast.error("Ocurrió un error al crear el producto");
+                });
+        });
     };
+
 
     return (
         <div className="grid gap-4 py-4">

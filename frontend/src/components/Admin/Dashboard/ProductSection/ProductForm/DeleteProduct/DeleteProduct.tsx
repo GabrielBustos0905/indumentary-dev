@@ -10,11 +10,23 @@ import { toast } from "sonner";
 export function DeleteProduct({ productId }: { productId: string }) {
     const [openDialog, setOpenDialog] = useState(false);
 
-    const onRemove = () => {
-        deleteProduct(productId);
-        setOpenDialog(false)
-        toast.warning("Producto eliminado!")
+    const onRemove = async () => {
+        try {
+            const result = await deleteProduct(productId);
+
+            if (result?.error) {
+                toast.error(result.error);
+                return;
+            }
+
+            toast.success("Producto eliminado correctamente");
+            setOpenDialog(false);
+        } catch (error) {
+            console.error("Error al eliminar producto:", error);
+            toast.error("Ocurrió un error al eliminar el producto");
+        }
     };
+
 
     return (
         <Dialog open={openDialog} onOpenChange={setOpenDialog}>

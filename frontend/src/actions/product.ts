@@ -76,7 +76,6 @@ export const updateProduct = async (id: string, values: z.infer<typeof updatePro
 
 export const deleteProduct = async (id: string) => {
     try {
-        console.log(id)
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/${id}`, {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },

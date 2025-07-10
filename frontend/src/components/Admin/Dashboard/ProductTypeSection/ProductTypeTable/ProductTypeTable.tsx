@@ -3,6 +3,7 @@
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useProductType } from "@/contexts/ProductTypeContext/ProductTypeContext"
+import { DeleteProductType, UpdateProductType } from "../ProductTypeForm"
 
 export function ProductTypeTable() {
     const { types } = useProductType()
@@ -37,6 +38,10 @@ export function ProductTypeTable() {
                                             alt={type.name}
                                             className="w-[60px] h-[60px] object-cover rounded"
                                         />
+                                    </TableCell>
+                                    <TableCell className="text-right space-x-2">
+                                        <UpdateProductType productType={type} />
+                                        <DeleteProductType productId={type.id} />
                                     </TableCell>
                                 </TableRow>
                             ))

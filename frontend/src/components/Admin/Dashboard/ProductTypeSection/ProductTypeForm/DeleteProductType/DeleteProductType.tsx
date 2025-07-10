@@ -1,32 +1,32 @@
 "use client"
 
-import { deleteProduct } from "@/actions/product";
+import { deleteProductType } from "@/actions/product-type";
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { useProduct } from "@/contexts/ProductsContext/ProductsContext";
+import { useProductType } from "@/contexts/ProductTypeContext/ProductTypeContext";
 import { Trash } from "lucide-react"
 import { useState } from "react";
 import { toast } from "sonner";
 
-export function DeleteProduct({ productId }: { productId: string }) {
+export function DeleteProductType({ productId }: { productId: string }) {
     const [openDialog, setOpenDialog] = useState(false);
-    const { reloadProducts } = useProduct()
+    const { reloadProductTypes } = useProductType()
 
     const onRemove = async () => {
         try {
-            const result = await deleteProduct(productId);
+            const result = await deleteProductType(productId);
 
             if (result?.error) {
                 toast.error(result.error);
                 return;
             }
 
-            toast.success("Producto eliminado correctamente");
-            reloadProducts()
+            toast.success("Tipo de producto eliminado correctamente");
+            reloadProductTypes()
             setOpenDialog(false);
         } catch (error) {
-            console.error("Error al eliminar producto:", error);
-            toast.error("Ocurrió un error al eliminar el producto");
+            console.error("Error al eliminar tipo de producto:", error);
+            toast.error("Ocurrió un error al eliminar tipo de producto");
         }
     };
 
@@ -40,9 +40,9 @@ export function DeleteProduct({ productId }: { productId: string }) {
             </DialogTrigger>
             <DialogContent aria-describedby="Add product" className="max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
-                    <DialogTitle>Actualizar Producto</DialogTitle>
+                    <DialogTitle>Actualizar tipo de producto</DialogTitle>
                     <Button variant="destructive" onClick={onRemove}>
-                        Eliminar Producto
+                        Eliminar tipo de producto
                     </Button>
                 </DialogHeader>
             </DialogContent>

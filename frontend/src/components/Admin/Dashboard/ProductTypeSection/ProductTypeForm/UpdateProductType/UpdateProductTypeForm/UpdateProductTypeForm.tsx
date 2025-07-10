@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import { createProductType } from "@/actions/product-type";
+"use client";
+
+import { updateProductType } from "@/actions/product-type";
 import { FormError } from "@/components/Auth/FormError";
 import { FormSuccess } from "@/components/Auth/FormSuccess";
 import { Button } from "@/components/ui/button";
@@ -7,38 +9,40 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useProductType } from "@/contexts/ProductTypeContext/ProductTypeContext";
-import { createProductTypeSchema } from "@/schemas/product-type.schema";
+import { updateProductTypeSchema } from "@/schemas/product-type.schema";
 import { uploadImage } from "@/services/cloudinary";
+import { ProductType } from "@/types/product-type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-interface CreateProductTypeFormProps {
+interface UpdateProductTypeFormProps {
     closeDialog: (open: boolean) => void;
+    productType: ProductType
 }
 
-export function CreateProductTypeForm(props: CreateProductTypeFormProps) {
-    const { reloadProductTypes } = useProductType();
-
-    const { closeDialog } = props;
+export function UpdateProductTypeForm(props: UpdateProductTypeFormProps) {
+    const { closeDialog, productType } = props;
     const [isPending, startTransition] = useTransition();
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
 
-    const form = useForm<z.infer<typeof createProductTypeSchema>>({
-        resolver: zodResolver(createProductTypeSchema),
+    const { reloadProductTypes } = useProductType();
+
+    const form = useForm<z.infer<typeof updateProductTypeSchema>>({
+        resolver: zodResolver(updateProductTypeSchema),
         defaultValues: {
-            name: "",
-            description: "",
-            imageUrl: ""
+            name: productType.name || "",
+            description: productType.description || "",
+            imageUrl: productType.imageUrl || ""
         }
     });
 
-    const onSubmit = (values: z.infer<typeof createProductTypeSchema>) => {
+    const onSubmit = (values: z.infer<typeof updateProductTypeSchema>) => {
         startTransition(() => {
-            createProductType(values)
+            updateProductType(productType.id, values)
                 .then((data) => {
                     if (data?.error) {
                         setError(data.error);
@@ -47,15 +51,15 @@ export function CreateProductTypeForm(props: CreateProductTypeFormProps) {
                     }
 
                     setSuccess(data.success);
-                    toast.success("Tipo de producto añadido!");
+                    toast.success("Tipo de producto actualizado!");
 
                     // ✅ solo se llama si todo salió bien
                     reloadProductTypes()
                     closeDialog(false);
                 })
                 .catch((err) => {
-                    console.error("Error creando producto", err);
-                    toast.error("Ocurrió un error al crear el producto");
+                    console.error("Error actualizando el producto", err);
+                    toast.error("Ocurrió un error al actualizar el producto");
                 });
         });
     }
@@ -132,14 +136,12 @@ export function CreateProductTypeForm(props: CreateProductTypeFormProps) {
                                 <FormMessage />
                             </FormItem>
                         )} />
-
-
                     </div>
 
                     <FormError message={error} />
                     <FormSuccess message={success} />
                     <Button type="submit" className="w-full cursor-pointer" disabled={isPending}>
-                        Añadir tipo producto
+                        Actualizar tipo producto
                     </Button>
                 </form>
             </Form>

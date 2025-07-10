@@ -15,7 +15,7 @@ import {
     deleteProduct
 } from "@/services/product.service"
 import { Product, ProductCreateInput, ProductUpdateInput } from "@/types/product"
-import { ProductType } from "@/types/product"
+import { ProductType } from "@/types/product-type"
 import { fetchProductTypes } from "@/services/product-type.service"
 
 interface ProductContextType {

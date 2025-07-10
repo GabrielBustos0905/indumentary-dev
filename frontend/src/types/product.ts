@@ -1,3 +1,5 @@
+import { ProductType } from "./product-type";
+
 export type ProductResponse = {
   data: Product[];
   total: number;
@@ -10,12 +12,6 @@ export type ProductImage = {
   id: string;
   url: string;
   productId: string;
-};
-
-export type ProductType = {
-  id: string;
-  name: string;
-  imageUrl?: string | null;
 };
 
 export type Product = {

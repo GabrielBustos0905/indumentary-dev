@@ -7,11 +7,12 @@ export function AuthBanner() {
     return (
         <div className={`hidden md:block w-1/2 relative h-screen`}>
             <Image
-                src="/auth-banner.png"
-                alt="Auth banner"
-                layout="fill"
-                objectFit="cover"
-                className="grayscale"
+                src="/banner.png"
+                alt="Banner"
+                fill
+                className="object-cover"
+                placeholder="blur"
+                blurDataURL="/tu-imagen.png"
             />
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                 <h2 className={`text-white text-3xl md:text-4xl font-semibold text-center px-4 ${dancingScript.className}`}>

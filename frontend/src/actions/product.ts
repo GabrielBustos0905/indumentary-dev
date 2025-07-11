@@ -1,3 +1,5 @@
+"use server"
+
 import { createProductSchema, updateProductSchema } from "@/schemas/product.schema";
 import { z } from "zod";
 

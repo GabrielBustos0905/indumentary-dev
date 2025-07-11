@@ -1,3 +1,5 @@
+"use server"
+
 import { loginSchema } from "@/schemas/login.schema";
 import { z } from "zod";
 

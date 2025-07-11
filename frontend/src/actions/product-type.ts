@@ -1,3 +1,5 @@
+"use server"
+
 import { createProductTypeSchema, updateProductTypeSchema } from "@/schemas/product-type.schema";
 import { z } from "zod";
 
@@ -38,6 +40,7 @@ export const createProductType = async (values: z.infer<typeof createProductType
 }
 
 export const updateProductType = async (id: string, values: z.infer<typeof updateProductTypeSchema>) => {
+
     const validateFields = updateProductTypeSchema.safeParse(values);
 
     if(!validateFields.success) return { error: "Campos invalidos!"};

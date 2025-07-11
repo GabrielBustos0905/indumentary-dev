@@ -4,10 +4,15 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useProductType } from "@/contexts/ProductTypeContext/ProductTypeContext"
 import { DeleteProductType, UpdateProductType } from "../ProductTypeForm"
+import { Loader } from "@/components/Loader"
 
 export function ProductTypeTable() {
-    const { types } = useProductType()
-    console.log(types)
+    const { types, loading } = useProductType()
+
+    if (loading) {
+        return <Loader />
+    }
+
     return (
         <div className="overflow-x-auto rounded-lg border mr-4 my-4">
             <Table>

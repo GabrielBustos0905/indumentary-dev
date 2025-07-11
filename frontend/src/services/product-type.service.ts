@@ -1,7 +1,9 @@
 import axios from "axios"
 import { ProductType, ProductTypeCreateInput, ProductTypeUpdateInput } from "@/types/product-type"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000"
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+  ? `${process.env.NEXT_PUBLIC_API_URL}`
+  : "http://localhost:4000"
 
 export const fetchProductTypes = async (): Promise<ProductType[]> => {
   const { data } = await axios.get<ProductType[]>(`${API_URL}/product-type`, {

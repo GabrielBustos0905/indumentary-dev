@@ -10,10 +10,15 @@ import {
 } from "@/components/ui/table"
 import { useProduct } from "@/contexts/ProductsContext/ProductsContext"
 import { DeleteProduct, UpdateProduct } from "../ProductForm"
+import { Loader } from "@/components/Loader";
 
 
 export function ProductTable() {
-    const { products } = useProduct()
+    const { products, loading } = useProduct();
+
+    if (loading) {
+        return <Loader />
+    }
 
     return (
         <div className="overflow-x-auto rounded-lg border mr-4 my-4">

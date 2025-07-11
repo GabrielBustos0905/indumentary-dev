@@ -38,9 +38,9 @@ export function DeleteProduct({ productId }: { productId: string }) {
                     <Trash className="h-4 w-4" />
                 </div>
             </DialogTrigger>
-            <DialogContent aria-describedby="Add product" className="max-h-[90vh] overflow-y-auto">
+            <DialogContent aria-describedby="Eliminar producto" className="max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
-                    <DialogTitle>Actualizar Producto</DialogTitle>
+                    <DialogTitle>Eliminar Producto</DialogTitle>
                     <Button variant="destructive" onClick={onRemove}>
                         Eliminar Producto
                     </Button>

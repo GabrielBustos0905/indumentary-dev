@@ -40,11 +40,20 @@ export function DeleteProductType({ productId }: { productId: string }) {
             </DialogTrigger>
             <DialogContent aria-describedby="Add product" className="max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
-                    <DialogTitle>Actualizar tipo de producto</DialogTitle>
+                    <DialogTitle>¿Estás seguro?</DialogTitle>
+                </DialogHeader>
+                <p className="text-sm text-muted-foreground">
+                    Esta acción eliminará el tipo de producto permanentemente. Esta acción no se puede deshacer.
+                </p>
+
+                <div className="flex justify-end gap-2 mt-4">
+                    <Button variant="outline" onClick={() => setOpenDialog(false)}>
+                        Cancelar
+                    </Button>
                     <Button variant="destructive" onClick={onRemove}>
                         Eliminar tipo de producto
                     </Button>
-                </DialogHeader>
+                </div>
             </DialogContent>
         </Dialog>
     )

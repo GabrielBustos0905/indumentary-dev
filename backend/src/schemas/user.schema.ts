@@ -11,5 +11,9 @@ export const loginSchema = z.object({
   password: z.string().min(6, { message: 'La contraseña debe tener al menos 6 caracteres' })
 })
 
+export const updateUserTypeSchema = z.object({
+  userType: z.enum(['ADMIN', 'CLIENT'])
+})
+
 export type RegisterInput = z.infer<typeof registerSchema>
 export type LoginInput = z.infer<typeof loginSchema>

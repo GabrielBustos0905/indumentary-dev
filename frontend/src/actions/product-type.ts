@@ -1,5 +1,3 @@
-"use server"
-
 import { createProductTypeSchema, updateProductTypeSchema } from "@/schemas/product-type.schema";
 import { z } from "zod";
 

@@ -11,3 +11,4 @@ export async function getFeaturedProducts(): Promise<Product[]> {
 
   return json.data;
 }
+

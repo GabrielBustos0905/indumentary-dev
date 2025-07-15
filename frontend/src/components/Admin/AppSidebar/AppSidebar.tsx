@@ -26,7 +26,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <NavProjects projects={data.projects} />
             </SidebarContent>
             <SidebarFooter>
-                <NavUser />
+                {/* <NavUser /> */}
+                Logout
             </SidebarFooter>
             <SidebarRail />
         </Sidebar>

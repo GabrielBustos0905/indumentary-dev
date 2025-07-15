@@ -8,9 +8,11 @@ import {
 } from "@/components/ui/navigation-menu"
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { categories } from "./MenuList.data";
+import { fetchProductTypes } from "@/services/product-type.service";
 
-export function MenuList() {
+export async function MenuList() {
+    const categories = await fetchProductTypes()
+
     return (
         <NavigationMenu>
             <NavigationMenuList>
@@ -39,7 +41,7 @@ export function MenuList() {
                             <li>
                                 <NavigationMenuLink asChild>
                                     <Link
-                                        href="/shop"
+                                        href="/catalogo"
                                         className={cn(
                                             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                                         )}
@@ -73,18 +75,18 @@ export function MenuList() {
                     <NavigationMenuTrigger className="uppercase font-semibold">Productos</NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                            {categories.map((component) => (
-                                <li key={component.title}>
+                            {categories?.map((category) => (
+                                <li key={category.id}>
                                     <NavigationMenuLink asChild>
                                         <Link
-                                            href={component.href}
+                                            href={`/catalogo/categoria/${category.name}`}
                                             className={cn(
                                                 "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                                             )}
                                         >
-                                            <div className="text-sm font-medium leading-none">{component.title}</div>
+                                            <div className="text-sm font-medium leading-none">{category.name}</div>
                                             <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                                                {component.description}
+                                                {category.description}
                                             </p>
                                         </Link>
                                     </NavigationMenuLink>

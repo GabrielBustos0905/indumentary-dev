@@ -20,7 +20,7 @@ export function Banner() {
                     <h1 className="text-4xl md:text-6xl font-bold mb-4">Nueva Colección</h1>
                     <p className="text-lg md:text-xl mb-6">Descubrí las últimas tendencias en moda</p>
                     <Link
-                        href="/tienda"
+                        href="/catalogo"
                         className="bg-white text-black px-6 py-3 rounded hover:bg-gray-200 transition"
                     >
                         Ver productos

@@ -16,6 +16,14 @@ export const fetchProducts = async (
   return data
 }
 
+export const fetchProductById = async (slug: string): Promise<Product> => {
+  const { data } = await axios.get(`${API_URL}/${slug}`, {
+    withCredentials: true
+  })
+
+  return data
+}
+
 export const createProduct = async (productData: ProductCreateInput): Promise<Product> => {
   const { data } = await axios.post<Product>(API_URL, productData, {
     withCredentials: true

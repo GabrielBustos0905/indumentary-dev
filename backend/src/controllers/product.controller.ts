@@ -86,11 +86,11 @@ export const getAllProduts = async (req: Request, res: Response): Promise<any> =
 }
 
 export const getProductById = async (req: Request, res: Response): Promise<any> => {
-  const { id } = req.params
+  const { slug } = req.params
 
   try {
     const product = await prisma.product.findUnique({
-      where: { id },
+      where: { slug },
       include: {
         images: true,
         type: true

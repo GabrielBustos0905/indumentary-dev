@@ -13,7 +13,7 @@ export function ProductCard({ product }: { product: Product }) {
     const discountPrice = product.offer !== null ? discount(product.price, product.offer) : 0
 
     return (
-        <Card key={product.slug} className="py-1 w-[250px] shadow-none border-none cursor-pointer" onClick={() => router.push(`/product/${product.slug}`)}>
+        <Card key={product.slug} className="py-1 w-[250px] shadow-none border-none cursor-pointer" onClick={() => router.push(`/${product.slug}`)}>
             <CardContent className="relative flex flex-col justify-center px-1 py-1">
                 <div className="relative overflow-hidden">
                     <img
@@ -43,7 +43,7 @@ export function ProductCard({ product }: { product: Product }) {
                 }
                 <h4 className="text-base text-gray-700 font-semibold uppercase mt-3 mb-2">{product.name}</h4>
                 {
-                    product.offer !== null ? (
+                    product.offer !== null && product.offer > 0 ? (
                         <div className="flex items-center gap-4">
                             <p className="text-base text-gray-400 font-semibold line-through">{price}</p>
                             <p className="text-base text-gray-700 font-semibold">{formatPrice(discountPrice)}</p>

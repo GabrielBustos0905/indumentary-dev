@@ -49,7 +49,7 @@ export function PriceFilter() {
             </div>
             <Slider
                 min={0}
-                max={100000}
+                max={200000}
                 step={1000}
                 value={priceRange}
                 onValueChange={(value: [number, number]) => setPriceRange(value)}

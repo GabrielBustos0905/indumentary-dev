@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { MenuList } from "./MenuList";
-import { ShoppingCart } from "lucide-react";
 import { Dancing_Script } from "next/font/google";
 import { UserNav } from "./UserNav";
+import { ShoppingCart } from "./ShoppingCart";
+import { Heart } from "lucide-react";
 
 const montserrat = Dancing_Script({ subsets: ['latin'], weight: ['400'] })
 
@@ -14,8 +15,9 @@ export function Header() {
             </Link>
             <MenuList />
             <div className="flex justify-center items-center gap-4">
+                <Heart strokeWidth="1.5" className="cursor-pointer" />
                 <UserNav />
-                <ShoppingCart size={28} strokeWidth={1.5} />
+                <ShoppingCart />
             </div>
         </header>
     )

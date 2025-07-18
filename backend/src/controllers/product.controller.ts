@@ -24,15 +24,15 @@ export const getAllProduts = async (req: Request, res: Response): Promise<any> =
     if (maxPrice != null) priceFilter.lte = Number(maxPrice)
 
     const filters: Prisma.ProductWhereInput = {
-      ...(typeId != null && typeId !== "all" && {
+      ...(typeId != null && typeId !== 'all' && {
         type: { name: { equals: String(typeId), mode: 'insensitive' } }
       }),
-      ...(size != null && size !== "all" && { availableSizes: { has: String(size) } }),
-      ...(isFeatured != null && isFeatured !== "all" && { isFeatured: isFeatured === 'true' }),
+      ...(size != null && size !== 'all' && { availableSizes: { has: String(size) } }),
+      ...(isFeatured != null && isFeatured !== 'all' && { isFeatured: isFeatured === 'true' }),
       ...(Object.keys(priceFilter).length > 0 && { price: priceFilter }),
       ...(q != null && {
         OR: [
-          { name: { contains: String(q), mode: 'insensitive' } },
+          { name: { contains: String(q), mode: 'insensitive' } }
           // { description: { contains: String(q), mode: 'insensitive' } }
         ]
       })

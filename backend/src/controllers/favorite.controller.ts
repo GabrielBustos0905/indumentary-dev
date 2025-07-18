@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import { type Request, type Response } from 'express'
 import prisma from '../lib/prisma'
 
 export const addFavorite = async (req: Request, res: Response): Promise<any> => {
@@ -10,8 +10,8 @@ export const addFavorite = async (req: Request, res: Response): Promise<any> => 
       return res.status(400).json({ error: 'productId es requerido' })
     }
 
-    if(!userId) {
-        return res.status(400).json({ error: 'Token es requerido' })
+    if (!userId) {
+      return res.status(400).json({ error: 'Token es requerido' })
     }
 
     // Verificar si ya existe el favorito
@@ -69,8 +69,8 @@ export const removeFavorite = async (req: Request, res: Response): Promise<any> 
     const userId = req.user?.id
     const { productId } = req.params
 
-    if(!userId) {
-        return res.status(400).json({ error: 'Token es requerido' })
+    if (!userId) {
+      return res.status(400).json({ error: 'Token es requerido' })
     }
 
     const existingFavorite = await prisma.favorite.findUnique({

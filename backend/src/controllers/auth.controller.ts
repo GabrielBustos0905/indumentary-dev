@@ -4,7 +4,7 @@ import { loginSchema, registerSchema } from '../schemas/user.schema'
 import bcrypt from 'bcrypt'
 import { generateToken } from '../utils/jwt'
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production'
 
 export const register = async (req: Request, res: Response): Promise<any> => {
   try {
@@ -77,7 +77,7 @@ export const login = async (req: Request, res: Response): Promise<any> => {
       secure: isProduction,
       sameSite: isProduction ? 'none' : 'lax',
       maxAge: 7 * 24 * 60 * 60 * 1000
-    });
+    })
 
     return res.status(200).json({
       message: 'Login exitoso',

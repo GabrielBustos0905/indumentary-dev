@@ -4,6 +4,8 @@ import { loginSchema, registerSchema } from '../schemas/user.schema'
 import bcrypt from 'bcrypt'
 import { generateToken } from '../utils/jwt'
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 export const register = async (req: Request, res: Response): Promise<any> => {
   try {
     const result = registerSchema.safeParse(req.body)
@@ -61,14 +63,21 @@ export const login = async (req: Request, res: Response): Promise<any> => {
 
     // console.log('user.userType:', user.userType)
 
+    // res.cookie('token', token, {
+    //   httpOnly: true,
+    //   // secure: process.env.NODE_ENV === 'production',
+    //   // sameSite: 'lax',
+    //   secure: process.env.NODE_ENV === 'production', // false en local
+    //   sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    //   maxAge: 7 * 24 * 60 * 60 * 1000 // 7 días
+    // })
+
     res.cookie('token', token, {
       httpOnly: true,
-      // secure: process.env.NODE_ENV === 'production',
-      // sameSite: 'lax',
-      secure: process.env.NODE_ENV === 'production', // false en local
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 días
-    })
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    });
 
     return res.status(200).json({
       message: 'Login exitoso',

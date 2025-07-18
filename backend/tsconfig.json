@@ -8,11 +8,11 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "types": [
-      "node",
-      "express",
-      "cookie-parser"
-    ]
+    // "types": [
+    //   "node",
+    //   "express",
+    //   "cookie-parser"
+    // ]
   },
   "include": [
     "src",

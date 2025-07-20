@@ -23,30 +23,20 @@ const app = express()
 
 app.use(cookieParser())
 
-const isProduction = process.env.NODE_ENV === 'production';
+// const isProduction = process.env.NODE_ENV === 'production';
 app.use(session({
   secret: JWT_SECRET, // puede ser tu JWT_SECRET o uno propio
   resave: false,
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: isProduction ? 'none' : 'lax',
+    // secure: process.env.NODE_ENV === 'production',
+    secure: 'auto',
+    // sameSite: isProduction ? 'none' : 'lax',
+    sameSite: "none",
     maxAge: 7 * 24 * 60 * 60 * 1000
   } // opcional, caducidad de la cookie de sesión
 }))
-
-// app.use(session({
-//   secret: JWT_SECRET,
-//   resave: false,
-//   saveUninitialized: false,
-//   cookie: {
-//     httpOnly: true,
-//     secure: isProduction,
-//     sameSite: isProduction ? 'none' : 'lax',
-//     maxAge: 7 * 24 * 60 * 60 * 1000
-//   }
-// }))
 
 app.use(passport.initialize())
 app.use(passport.session())

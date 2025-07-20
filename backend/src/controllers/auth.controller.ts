@@ -67,8 +67,10 @@ export const login = async (req: Request, res: Response): Promise<any> => {
       httpOnly: true,
       // secure: process.env.NODE_ENV === 'production',
       // sameSite: 'lax',
-      secure: process.env.NODE_ENV === 'production', // false en local
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      // secure: process.env.NODE_ENV === 'production', // false en local
+      // sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      secure: false,
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 días
     })
 

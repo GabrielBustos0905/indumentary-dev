@@ -3,7 +3,6 @@ import prisma from '../lib/prisma'
 import { loginSchema, registerSchema } from '../schemas/user.schema'
 import bcrypt from 'bcrypt'
 import { generateToken } from '../utils/jwt'
-import { NODE_ENV } from '../config/env.config'
 
 export const register = async (req: Request, res: Response): Promise<any> => {
   try {
@@ -60,12 +59,12 @@ export const login = async (req: Request, res: Response): Promise<any> => {
 
     const token = generateToken(user.id, user.userType)
 
-    res.cookie('token', token, {
+    res.cookie("token", token, {
       httpOnly: true,
       secure: true,
-      sameSite: NODE_ENV === 'production' ? 'none' : 'none',
-      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 días
-    })
+      sameSite: "none",
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+    });
 
     return res.status(200).json({
       message: 'Login exitoso',
@@ -92,8 +91,8 @@ export const logout = async (req: Request, res: Response): Promise<any> => {
   // Limpiar cookie del token
   res.clearCookie('token', {
     httpOnly: true,
-    secure: NODE_ENV === 'production',
-    sameSite: NODE_ENV === 'production' ? 'none' : 'none',
+    secure: true,
+    sameSite:'none',
     maxAge: 0 // Asegura que la cookie se borre
   })
 

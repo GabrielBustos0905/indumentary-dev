@@ -1,12 +1,12 @@
 import express from 'express'
-// import session from 'express-session'
+import session from 'express-session'
 import passport from 'passport'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import { corsOptions } from './config/cors.config'
 import cookieParser from 'cookie-parser'
 import './lib/passport'
-// import { JWT_SECRET } from './config/env.config'
+import { JWT_SECRET } from './config/env.config'
 
 // ------- Rutas ------------
 import userRoute from './routes/user.route'
@@ -23,17 +23,17 @@ const app = express()
 
 app.use(cookieParser())
 
-// app.use(session({
-//   secret: JWT_SECRET, // puede ser tu JWT_SECRET o uno propio
-//   resave: false,
-//   saveUninitialized: false,
-//   cookie: {
-//     httpOnly: true,
-//     secure: true,
-//     sameSite: 'none',
-//     maxAge: 7 * 24 * 60 * 60 * 1000
-//   } // opcional, caducidad de la cookie de sesión
-// }))
+app.use(session({
+  secret: JWT_SECRET, // puede ser tu JWT_SECRET o uno propio
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+    maxAge: 7 * 24 * 60 * 60 * 1000
+  } // opcional, caducidad de la cookie de sesión
+}))
 
 app.use(passport.initialize())
 app.use(passport.session())

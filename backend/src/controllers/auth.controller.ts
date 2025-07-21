@@ -90,7 +90,7 @@ export const logout = async (req: Request, res: Response): Promise<any> => {
 
   // Limpiar cookie del token
   res.clearCookie('token', {
-    httpOnly: true,
+    // httpOnly: true,
     secure: true,
     sameSite:'none',
     maxAge: 0 // Asegura que la cookie se borre

@@ -60,7 +60,7 @@ export const login = async (req: Request, res: Response): Promise<any> => {
     const token = generateToken(user.id, user.userType)
 
     res.cookie("token", token, {
-      httpOnly: true,
+      // httpOnly: true,
       secure: true,
       sameSite: "none",
       maxAge: 1000 * 60 * 60 * 24 * 7,

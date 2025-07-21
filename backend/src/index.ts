@@ -29,7 +29,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: NODE_ENV === 'production',
+    secure: true,
     sameSite: NODE_ENV === 'production' ? 'none' : 'none',
     maxAge: 7 * 24 * 60 * 60 * 1000
   } // opcional, caducidad de la cookie de sesión

@@ -13,9 +13,9 @@ interface CatalogoPageProps {
     };
 }
 
-export default async function CatalogoPage({ searchParams }: CatalogoPageProps) {
+export default async function CatalogoPage({ params }: { params: Promise<CatalogoPageProps> }) {
 
-    const products = await fetchProducts(await searchParams);
+    const products = await fetchProducts((await params).searchParams);
 
     if (products.data.length === 0) return <Loader />
 

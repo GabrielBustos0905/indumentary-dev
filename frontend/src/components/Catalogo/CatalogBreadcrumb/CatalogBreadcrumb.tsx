@@ -2,6 +2,7 @@
 
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 export function CatalogBreadcrumb() {
     const searchParams = useSearchParams();
@@ -16,23 +17,25 @@ export function CatalogBreadcrumb() {
     };
 
     return (
-        <Breadcrumb className="mb-4">
-            <BreadcrumbList>
-                <BreadcrumbItem>
-                    <BreadcrumbLink href="/catalogo" onClick={handleResetType}>
-                        Catálogo
-                    </BreadcrumbLink>
-                </BreadcrumbItem>
+        <Suspense>
+            <Breadcrumb className="mb-4">
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink href="/catalogo" onClick={handleResetType}>
+                            Catálogo
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
 
-                {type && type !== "all" && (
-                    <>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <span className="font-medium capitalize">{type}</span>
-                        </BreadcrumbItem>
-                    </>
-                )}
-            </BreadcrumbList>
-        </Breadcrumb>
+                    {type && type !== "all" && (
+                        <>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <span className="font-medium capitalize">{type}</span>
+                            </BreadcrumbItem>
+                        </>
+                    )}
+                </BreadcrumbList>
+            </Breadcrumb>
+        </Suspense>
     );
 }

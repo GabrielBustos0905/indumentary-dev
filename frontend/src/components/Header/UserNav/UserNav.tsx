@@ -34,10 +34,10 @@ export function UserNav() {
                 </DropdownMenu>
             ) : (
                 <div>
-                    <Link href="/signin">
+                    <Link href="/auth/login">
                         <Button>Signin</Button>
                     </Link>
-                    <Link href="/signup">
+                    <Link href="/auth/register">
                         <Button variant="link">Signup</Button>
                     </Link>
                 </div>

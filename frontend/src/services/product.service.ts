@@ -16,8 +16,8 @@ export const fetchProducts = async (
   return data
 }
 
-export const fetchProductById = async (slug: string): Promise<Product> => {
-  const { data } = await axios.get(`${API_URL}/${slug}`, {
+export const fetchProductById =  async (slug: string): Promise<Product> => {
+  const { data } =  await axios.get(`${API_URL}/${slug}`, {
     withCredentials: true
   })
 

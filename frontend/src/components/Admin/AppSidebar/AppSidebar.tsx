@@ -11,7 +11,6 @@ import { data } from "./AppSidebar.data"
 import { NavMain } from "./NavMain"
 import { TeamSwitcher } from "./TeamSwitcher"
 import { NavProjects } from "./NavProjects"
-import { NavUser } from "./NavUser"
 
 // This is sample data.
 

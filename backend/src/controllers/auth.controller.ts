@@ -4,8 +4,6 @@ import { loginSchema, registerSchema } from '../schemas/user.schema'
 import bcrypt from 'bcrypt'
 import { generateToken } from '../utils/jwt'
 
-const isProduction = process.env.NODE_ENV === 'production'
-
 export const register = async (req: Request, res: Response): Promise<any> => {
   try {
     const result = registerSchema.safeParse(req.body)
@@ -66,7 +64,7 @@ export const login = async (req: Request, res: Response): Promise<any> => {
       // secure: process.env.NODE_ENV === 'production', // false en local
       secure: true, // false en local
       // sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-      sameSite: 'none',
+      sameSite: 'lax',
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 días
     })
 

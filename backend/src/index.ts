@@ -6,7 +6,7 @@ import dotenv from 'dotenv'
 import { corsOptions } from './config/cors.config'
 import cookieParser from 'cookie-parser'
 import './lib/passport'
-import { JWT_SECRET } from './config/env.config'
+import { JWT_SECRET, NODE_ENV } from './config/env.config'
 
 // ------- Rutas ------------
 import userRoute from './routes/user.route'
@@ -23,17 +23,14 @@ const app = express()
 
 app.use(cookieParser())
 
-// const isProduction = process.env.NODE_ENV === 'production';
 app.use(session({
   secret: JWT_SECRET, // puede ser tu JWT_SECRET o uno propio
   resave: false,
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    // secure: process.env.NODE_ENV === 'production',
-    secure: true,
-    // sameSite: isProduction ? 'none' : 'lax',
-    sameSite: 'none',
+    secure: NODE_ENV === 'production',
+    sameSite: NODE_ENV === 'production' ? 'none' : 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000
   } // opcional, caducidad de la cookie de sesión
 }))

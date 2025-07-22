@@ -7,6 +7,7 @@ import {
 } from "recharts";
 import { Button } from "@/components/ui/button";
 import { DailyStats, Order } from "./SalesChart.types";
+import { fetchOrders } from "@/services/order.service";
 
 export function SalesChart() {
     const [orders, setOrders] = useState<Order[]>([]);
@@ -14,15 +15,13 @@ export function SalesChart() {
     const [data, setData] = useState<DailyStats[]>([]);
 
     useEffect(() => {
-        const fetchOrders = async () => {
-            const res = await fetch("http://localhost:4000/order", {
-                credentials: "include",
-            });
-            const ordersData: Order[] = await res.json();
+        const fetchAllOrders = async () => {
+            const res = await fetchOrders()
+            const ordersData: Order[] = res;
             setOrders(ordersData);
         };
 
-        fetchOrders();
+        fetchAllOrders();
     }, []);
 
     useEffect(() => {

@@ -22,7 +22,7 @@ export function ProtectRoute({
             const user = await getUserProfile()
 
             if (!user) {
-                router.replace('/login')
+                router.replace('/auth/login')
                 return
             }
 

@@ -8,7 +8,6 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL
 export const fetchProducts = async (
   queryParams: Record<string, unknown> = {}
 ): Promise<ProductResponse> => {
-  // console.log({ "filters": queryParams })
   const { data } = await axios.get<ProductResponse>(API_URL, { 
     params: queryParams ,
     withCredentials: true

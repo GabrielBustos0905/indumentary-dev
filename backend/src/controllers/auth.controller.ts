@@ -64,7 +64,6 @@ export const login = async (req: Request, res: Response): Promise<any> => {
       secure: true,
       sameSite: 'none',
       path: '/',
-      domain: 'https://indumentary-dev.vercel.app',
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 días
     });
 
@@ -73,7 +72,6 @@ export const login = async (req: Request, res: Response): Promise<any> => {
       secure: true,
       sameSite: 'none',
       path: '/',
-      domain: 'https://indumentary-dev.vercel.app',
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
 

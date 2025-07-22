@@ -32,7 +32,6 @@ app.use(session({
     secure: true,
     sameSite: 'none',
     path: '/',
-    domain: 'https://indumentary-dev.vercel.app',
     maxAge: 7 * 24 * 60 * 60 * 1000
   } // opcional, caducidad de la cookie de sesión
 }))

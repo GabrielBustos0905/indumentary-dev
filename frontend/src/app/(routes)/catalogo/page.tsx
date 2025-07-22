@@ -17,7 +17,7 @@ export default async function CatalogoPage({ params }: { params: Promise<Catalog
 
     const products = await fetchProducts((await params).searchParams);
 
-    if (products.data.length === 0) return <Loader />
+    if (products.data == undefined) return <Loader />
 
     return (
         <div>

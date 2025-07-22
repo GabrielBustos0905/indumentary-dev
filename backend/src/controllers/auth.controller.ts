@@ -59,10 +59,17 @@ export const login = async (req: Request, res: Response): Promise<any> => {
 
     const token = generateToken(user.id, user.userType)
 
-    res.cookie("token", token, {
-      // httpOnly: true,
+    res.cookie('token', token, {
+      httpOnly: true,
       secure: true,
-      sameSite: "none",
+      sameSite: 'none',
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7 días
+    });
+
+    res.cookie('token_middleware', token, {
+      httpOnly: false,
+      secure: true,
+      sameSite: 'none',
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
 
@@ -89,12 +96,24 @@ export const logout = async (req: Request, res: Response): Promise<any> => {
   })
 
   // Limpiar cookie del token
+  // res.clearCookie('token', {
+  //   // httpOnly: true,
+  //   secure: true,
+  //   sameSite:'none',
+  //   maxAge: 0 // Asegura que la cookie se borre
+  // })
+
   res.clearCookie('token', {
-    // httpOnly: true,
+    httpOnly: true,
     secure: true,
-    sameSite:'none',
-    maxAge: 0 // Asegura que la cookie se borre
-  })
+    sameSite: 'none',
+  });
+
+  res.clearCookie('token_middleware', {
+    httpOnly: false,
+    secure: true,
+    sameSite: 'none',
+  });
 
   return res.status(200).json({ message: 'Sesión cerrada exitosamente' })
 }

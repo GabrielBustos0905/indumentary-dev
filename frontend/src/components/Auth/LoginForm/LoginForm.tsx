@@ -35,8 +35,8 @@ export function LoginForm() {
                     setError(data.error);
                     setSuccess(data.success)
                 })
-            if (!error) router.replace("/")
         })
+        if (!error) router.push("/")
     }
 
     return (

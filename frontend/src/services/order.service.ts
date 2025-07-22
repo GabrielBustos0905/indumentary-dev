@@ -1,7 +1,7 @@
 import axios from "axios"
 import { Order, OrderStatus } from "@/types/order"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://indumentary-dev.onrender.com";
 
 export const fetchOrders = async (): Promise<Order[]> => {
   const { data } = await axios.get<Order[]>(API_URL, {

@@ -1,7 +1,7 @@
 import { Product, ProductCreateInput, ProductResponse, ProductUpdateInput } from "@/types/product"
 import axios from "axios"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL as string
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://indumentary-dev.onrender.com"
 
 export const fetchProducts = async (
   queryParams: Record<string, unknown> = {}

@@ -35,7 +35,7 @@ export function LoginForm() {
                     setError(data.error);
                     setSuccess(data.success)
                 })
-            if (!error) router.push("/auth/login")
+            if (!error) router.replace("/")
         })
     }
 

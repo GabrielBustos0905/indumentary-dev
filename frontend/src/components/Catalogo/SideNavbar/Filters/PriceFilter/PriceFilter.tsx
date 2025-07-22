@@ -9,7 +9,7 @@ export function PriceFilter() {
     const searchParams = useSearchParams();
 
     const minFromURL = parseInt(searchParams.get("minPrice") || "0", 10);
-    const maxFromURL = parseInt(searchParams.get("maxPrice") || "100000", 10);
+    const maxFromURL = parseInt(searchParams.get("maxPrice") || "200000", 10);
 
     const [priceRange, setPriceRange] = useState<[number, number]>([
         minFromURL,

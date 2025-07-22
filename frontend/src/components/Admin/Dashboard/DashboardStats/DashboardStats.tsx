@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import { Shirt, User, DollarSign } from 'lucide-react';
+import { fetchUsers } from '@/services/user.service';
+import { fetchProducts } from '@/services/product.service';
+import { fetchOrders } from '@/services/order.service';
 
 export function DashboardStats() {
     const [usersCount, setUsersCount] = useState<number | null>(null)
@@ -14,18 +17,21 @@ export function DashboardStats() {
         async function fetchCounts() {
             try {
                 const [usersRes, productsRes, ordersRes] = await Promise.all([
-                    fetch('http://localhost:4000/users', { credentials: 'include' }),
-                    fetch('http://localhost:4000/product', { credentials: 'include' }),
-                    fetch('http://localhost:4000/order', { credentials: 'include' }),
+                    fetchUsers(),
+                    fetchProducts(),
+                    fetchOrders(),
                 ])
 
-                if (!usersRes.ok || !productsRes.ok || !ordersRes.ok) {
-                    throw new Error('Error al obtener los datos')
-                }
+                // if (!usersRes.ok || !productsRes.ok || !ordersRes.ok) {
+                //     throw new Error('Error al obtener los datos')
+                // }
 
-                const users = await usersRes.json()
-                const products = await productsRes.json()
-                const orders = await ordersRes.json()
+                // const users = await usersRes.json()
+                // const products = await productsRes.json()
+                // const orders = await ordersRes.json()
+                const users = usersRes
+                const products = productsRes
+                const orders = ordersRes
 
                 setUsersCount(users.length)
                 setProductsCount(products.data.length)

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts'
 import { Order } from './ProductsChart.type'
+import { fetchOrders } from '@/services/order.service'
 
 export function ProductsChart() {
     const [orders, setOrders] = useState<Order[]>([])
@@ -11,19 +12,13 @@ export function ProductsChart() {
     const [mode, setMode] = useState<'day' | 'week'>('day')
 
     useEffect(() => {
-        const fetchOrders = async () => {
-            try {
-                const res = await fetch("http://localhost:4000/order", {
-                    credentials: "include",
-                });
-                const ordersData: Order[] = await res.json();
-                setOrders(ordersData);
-            } catch (err) {
-                console.error('Error al traer órdenes:', err)
-            }
-        }
+        const fetchAllOrders = async () => {
+            const res = await fetchOrders()
+            const ordersData: Order[] = res;
+            setOrders(ordersData);
+        };
 
-        fetchOrders()
+        fetchAllOrders();
     }, [])
 
     const groupBy = (dateStr: string) => {

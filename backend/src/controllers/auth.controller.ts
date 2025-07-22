@@ -73,6 +73,8 @@ export const login = async (req: Request, res: Response): Promise<any> => {
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
 
+    console.log(req.cookies)
+
     return res.status(200).json({
       message: 'Login exitoso',
       user: {

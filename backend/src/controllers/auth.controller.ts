@@ -63,6 +63,7 @@ export const login = async (req: Request, res: Response): Promise<any> => {
       httpOnly: true,
       secure: true,
       sameSite: 'none',
+      path: '/',
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 días
     });
 
@@ -70,6 +71,7 @@ export const login = async (req: Request, res: Response): Promise<any> => {
       httpOnly: false,
       secure: true,
       sameSite: 'none',
+      path: '/',
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
 

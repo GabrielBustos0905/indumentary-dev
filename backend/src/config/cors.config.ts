@@ -1,6 +1,6 @@
 import type cors from 'cors'
 
 export const corsOptions: cors.CorsOptions = {
-  origin: ['http://localhost:3000'], // origen del frontend
+  origin: ['https://indumentary-dev.vercel.app'], // origen del frontend
   credentials: true
 }

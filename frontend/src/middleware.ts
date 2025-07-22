@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { authRoutes, publicRoutes, DEFAULT_LOGIN_REDIRECT } from './routes';
 
 export function middleware(req: NextRequest) {
-  const token = req.cookies.get('token')?.value;
+  const token = req.cookies.get('token_middleware')?.value;
   const { nextUrl } = req;
   const pathname = nextUrl.pathname;
 

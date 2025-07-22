@@ -75,7 +75,7 @@ export const login = async (req: Request, res: Response): Promise<any> => {
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
 
-    console.log("cookie", req.cookies.token)
+    // console.log("cookie", req.cookies.token)
 
     return res.status(200).json({
       message: 'Login exitoso',
@@ -98,14 +98,6 @@ export const logout = async (req: Request, res: Response): Promise<any> => {
       return res.status(500).json({ message: 'Error al cerrar sesión' })
     }
   })
-
-  // Limpiar cookie del token
-  // res.clearCookie('token', {
-  //   // httpOnly: true,
-  //   secure: true,
-  //   sameSite:'none',
-  //   maxAge: 0 // Asegura que la cookie se borre
-  // })
 
   res.clearCookie('token', {
     httpOnly: true,

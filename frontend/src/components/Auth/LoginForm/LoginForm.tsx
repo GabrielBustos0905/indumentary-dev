@@ -12,11 +12,13 @@ import { FormSuccess } from "../FormSuccess"
 import { Button } from "@/components/ui/button"
 import { useState, useTransition } from "react"
 import { login } from "@/actions/login"
+import { useRouter } from "next/navigation"
 
 export function LoginForm() {
     const [isPending, startTransition] = useTransition();
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
+    const router = useRouter()
 
     const form = useForm<z.infer<typeof loginSchema>>({
         resolver: zodResolver(loginSchema),
@@ -33,7 +35,7 @@ export function LoginForm() {
                     setError(data.error);
                     setSuccess(data.success)
                 })
-            // if (!error) router.push("/auth/login")
+            if (!error) router.push("/auth/login")
         })
     }
 

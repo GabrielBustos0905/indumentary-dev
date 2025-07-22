@@ -27,7 +27,7 @@ export function ProtectRoute({
             }
 
             if (!allowedRoles.includes(user.userType)) {
-                router.replace('/')
+                router.replace('/unauthorized')
                 return
             }
 

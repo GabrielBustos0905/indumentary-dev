@@ -14,8 +14,6 @@ export function UserTable() {
         )
     }
 
-    console.log(users)
-
     return (
         <div className="overflow-x-auto rounded-lg border mr-4 my-4">
             <Table>

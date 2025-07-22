@@ -13,7 +13,7 @@ export async function ChooseCategory() {
                 {
                     categories?.map((category: ProductType) => (
                         <Link
-                            href={`/catalogo/category/${category.name}`}
+                            href={`/catalogo?typeId=${category.name}`}
                             key={category.id}
                             className="relative max-w-xs mx-auto overflow-hidden bg-no-repeat bg-cover rounded-lg"
                         >

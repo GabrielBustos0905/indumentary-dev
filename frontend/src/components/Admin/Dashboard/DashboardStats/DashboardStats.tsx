@@ -22,13 +22,6 @@ export function DashboardStats() {
                     fetchOrders(),
                 ])
 
-                // if (!usersRes.ok || !productsRes.ok || !ordersRes.ok) {
-                //     throw new Error('Error al obtener los datos')
-                // }
-
-                // const users = await usersRes.json()
-                // const products = await productsRes.json()
-                // const orders = await ordersRes.json()
                 const users = usersRes
                 const products = productsRes
                 const orders = ordersRes

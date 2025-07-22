@@ -3,6 +3,7 @@ import { authRoutes, publicRoutes, DEFAULT_LOGIN_REDIRECT } from './routes';
 
 export function middleware(req: NextRequest) {
   const token = req.cookies.get('token_middleware')?.value;
+  console.log(token)
   const { nextUrl } = req;
   const pathname = nextUrl.pathname;
 

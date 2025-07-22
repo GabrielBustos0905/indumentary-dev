@@ -1,9 +1,7 @@
 import axios from "axios";
 import { User } from "@/types/user";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL
-  ? `${process.env.NEXT_PUBLIC_API_URL}/users`
-  : "http://localhost:4000/users";
+const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
 // Obtener todos los usuarios
 export const fetchUsers = async (): Promise<User[]> => {

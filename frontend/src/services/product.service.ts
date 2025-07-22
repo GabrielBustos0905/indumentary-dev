@@ -1,9 +1,7 @@
 import { Product, ProductCreateInput, ProductResponse, ProductUpdateInput } from "@/types/product"
 import axios from "axios"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL
-  ? `${process.env.NEXT_PUBLIC_API_URL}/product`
-  : "http://localhost:4000/product"
+const API_URL = process.env.NEXT_PUBLIC_API_URL as string
 
 export const fetchProducts = async (
   queryParams: Record<string, unknown> = {}

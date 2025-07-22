@@ -1,6 +1,6 @@
-// import { ProductsGrid } from "@/components/Catalogo";
-// import { Loader } from "@/components/Loader";
-// import { fetchProducts } from "@/services/product.service";
+import { ProductsGrid } from "@/components/Catalogo";
+import { Loader } from "@/components/Loader";
+import { fetchProducts } from "@/services/product.service";
 
 // interface CatalogoPageProps {
 //     searchParams: {
@@ -30,22 +30,18 @@
 //     );
 // }
 
-import { ProductsGrid } from "@/components/Catalogo";
-import { Loader } from "@/components/Loader";
-import { fetchProducts } from "@/services/product.service";
-
 interface CatalogoPageProps {
     searchParams: {
         type?: string;
         size?: string;
         minPrice?: string;
         maxPrice?: string;
-        q?: string; // search query
+        q?: string;
         page?: string;
     };
 }
 
-export default async function CatalogoPage({ searchParams }: CatalogoPageProps) {
+export default async function CatalogoPage({ searchParams }: { searchParams: CatalogoPageProps['searchParams'] }) {
     const products = await fetchProducts(searchParams);
 
     if (products.data.length === 0) return <Loader />;
@@ -58,5 +54,6 @@ export default async function CatalogoPage({ searchParams }: CatalogoPageProps) 
         </div>
     );
 }
+
 
 

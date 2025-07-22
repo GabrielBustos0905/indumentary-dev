@@ -1,3 +1,5 @@
+"use client"
+
 import { CatalogSearchBar } from "../CatalogSearchBar";
 import { FilterByType, PriceFilter, SizeFilter } from "./Filters";
 

@@ -28,8 +28,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    httpOnly: true,
-    secure: true,
+    // httpOnly: true,
+    // secure: true,
     sameSite: 'none',
     maxAge: 7 * 24 * 60 * 60 * 1000
   } // opcional, caducidad de la cookie de sesión

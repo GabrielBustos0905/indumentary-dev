@@ -1,7 +1,7 @@
 import axios from "axios";
 import { User } from "@/types/user";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://indumentary-dev.onrender.com";
+const API_URL = process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}/users` : "https://indumentary-dev.onrender.com/users";
 
 // Obtener todos los usuarios
 export const fetchUsers = async (): Promise<User[]> => {

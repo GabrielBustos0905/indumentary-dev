@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 import { useAuth } from "@/contexts";
 import Link from "next/link";
-import { Heart, User } from "lucide-react";
+import { User } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 export function UserNav() {
@@ -14,7 +14,6 @@ export function UserNav() {
         <nav>
             {user ? (
                 <>
-                    <Heart strokeWidth="1.5" className="hidden md:block cursor-pointer" />
                     <DropdownMenu>
                         <DropdownMenuTrigger className="flex gap-1 items-center">
                             <User strokeWidth="1.5" className="cursor-pointer" />

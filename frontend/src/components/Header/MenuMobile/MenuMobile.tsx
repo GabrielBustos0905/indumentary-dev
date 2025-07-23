@@ -1,5 +1,5 @@
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Home, Menu, Shirt } from "lucide-react";
+import { Heart, Home, Menu, Shirt } from "lucide-react";
 import { ShoppingCart } from "../ShoppingCart";
 import { Separator } from "@/components/ui/separator";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -30,6 +30,10 @@ export async function MenuMobile() {
                             <div className="my-4 flex gap-2 items-center hover:translate-x-1.5 hover:duration-150 transition-all  cursor-pointer">
                                 <Shirt className="w-5 h-5" />
                                 <Link href="/catalogo" className="text-md font-medium">Catalogo</Link>
+                            </div>
+                            <div className="my-4 flex gap-2 items-center hover:translate-x-1.5 hover:duration-150 transition-all  cursor-pointer">
+                                <Heart className="w-5 h-5" />
+                                <Link href="#" className="text-md font-medium">Favoritos</Link>
                             </div>
 
                             <Accordion collapsible type="single" className="h-min">

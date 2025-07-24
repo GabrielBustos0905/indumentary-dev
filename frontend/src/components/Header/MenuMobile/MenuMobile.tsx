@@ -31,7 +31,7 @@ export async function MenuMobile() {
                                 <Shirt className="w-5 h-5" />
                                 <Link href="/catalogo" className="text-md font-medium">Catalogo</Link>
                             </div>
-                            <div className="my-4 flex gap-2 items-center hover:translate-x-1.5 hover:duration-150 transition-all  cursor-pointer">
+                            <div className="mb-2 flex gap-2 items-center hover:translate-x-1.5 hover:duration-150 transition-all  cursor-pointer">
                                 <Heart className="w-5 h-5" />
                                 <Link href="#" className="text-md font-medium">Favoritos</Link>
                             </div>

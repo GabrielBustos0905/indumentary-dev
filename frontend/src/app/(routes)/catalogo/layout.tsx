@@ -5,12 +5,12 @@ import { Suspense } from "react";
 
 export default function CatalogoLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div className="my-4 px-12">
+        <div className="my-4 px-5 md:px-12">
             <Suspense fallback={<div>Cargando navegación...</div>}>
                 <CatalogBreadcrumb />
             </Suspense>
             <Separator />
-            <div className="mt-4 flex justify-between gap-4">
+            <div className="mt-4 flex md:justify-between gap-4">
                 <Suspense fallback={<div>Cargando filtros...</div>}>
                     <SideNavbar />
                 </Suspense>

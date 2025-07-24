@@ -12,6 +12,7 @@ export async function MenuMobile() {
 
     return (
         <nav className="flex gap-4 md:hidden">
+            <UserNav />
             <ShoppingCart />
             <Dialog>
                 <DialogTrigger>
@@ -61,7 +62,7 @@ export async function MenuMobile() {
                                 </AccordionItem>
                             </Accordion>
                         </div>
-                        <UserNav />
+
                     </div>
                 </DialogContent>
             </Dialog>

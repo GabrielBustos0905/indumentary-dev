@@ -55,15 +55,25 @@ export function NavMain({
                             </CollapsibleTrigger>
                             <CollapsibleContent>
                                 <SidebarMenuSub>
-                                    {item.items?.map((subItem) => (
-                                        <SidebarMenuSubItem key={subItem.title}>
-                                            <SidebarMenuSubButton asChild>
-                                                <Link href={`/admin/dashboard/${subItem.url}`}>
-                                                    <span>{subItem.title}</span>
-                                                </Link>
-                                            </SidebarMenuSubButton>
-                                        </SidebarMenuSubItem>
-                                    ))}
+                                    {
+                                        item.title === "Home" ? item.items?.map((subItem) => (
+                                            <SidebarMenuSubItem key={subItem.title}>
+                                                <SidebarMenuSubButton asChild>
+                                                    <Link href={subItem.url}>
+                                                        <span>{subItem.title}</span>
+                                                    </Link>
+                                                </SidebarMenuSubButton>
+                                            </SidebarMenuSubItem>
+                                        )) : item.items?.map((subItem) => (
+                                            <SidebarMenuSubItem key={subItem.title}>
+                                                <SidebarMenuSubButton asChild>
+                                                    <Link href={`/admin/dashboard/${subItem.url}`}>
+                                                        <span>{subItem.title}</span>
+                                                    </Link>
+                                                </SidebarMenuSubButton>
+                                            </SidebarMenuSubItem>
+                                        ))
+                                    }
                                 </SidebarMenuSub>
                             </CollapsibleContent>
                         </SidebarMenuItem>

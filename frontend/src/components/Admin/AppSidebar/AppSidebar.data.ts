@@ -41,11 +41,11 @@ export const data = {
             items: [
                 {
                     title: "Home",
-                    url: "https://indumentary-dev.vercel.app",
+                    url: "/",
                 },
                 {
                     title: "Catalogo",
-                    url: "https://indumentary-dev.vercel.app/catalogo",
+                    url: "/catalogo",
                 },
             ],
         },

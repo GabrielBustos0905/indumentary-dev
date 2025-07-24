@@ -41,11 +41,11 @@ export const data = {
             items: [
                 {
                     title: "Home",
-                    url: "/",
+                    url: "https://indumentary-dev.vercel.app",
                 },
                 {
                     title: "Catalogo",
-                    url: "#",
+                    url: "https://indumentary-dev.vercel.app/catalogo",
                 },
             ],
         },
@@ -80,17 +80,17 @@ export const data = {
     projects: [
         {
             name: "Instagram",
-            url: "#",
+            url: "https://www.instagram.com/_gabibustos_",
             icon: Instagram,
         },
         {
             name: "Github",
-            url: "#",
+            url: "https://github.com/GabrielBustos0905",
             icon: Github,
         },
         {
             name: "Pagina Web",
-            url: "#",
+            url: "https://gabriel-bustos.vercel.app",
             icon: Code,
         },
     ],

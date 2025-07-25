@@ -21,7 +21,7 @@ export function ProductTable() {
     }
 
     return (
-        <div className="overflow-x-auto rounded-lg border mr-4 my-4">
+        <div className="overflow-x-auto rounded-lg border my-4">
             <Table>
                 <TableHeader>
                     <TableRow>

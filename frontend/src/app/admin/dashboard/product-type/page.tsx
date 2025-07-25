@@ -2,6 +2,9 @@ import { ProductTypeSection } from "@/components/Admin/Dashboard/ProductTypeSect
 
 export default function ProductTypePage() {
     return (
-        <ProductTypeSection />
+        <div>
+            <h1 className="text-2xl font-bold text-gray-800">Tipo de Productos</h1>
+            <ProductTypeSection />
+        </div>
     )
 }

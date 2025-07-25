@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { MenuList } from "./MenuList"
 import { Dancing_Script } from "next/font/google"

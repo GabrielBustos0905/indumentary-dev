@@ -1,9 +1,13 @@
 import { OrderSection } from "@/components/Admin/Dashboard/OrderSection";
+import { Separator } from "@/components/ui/separator";
 
 export default function OrdersPage() {
     return (
         <div>
-            <h1 className="text-2xl font-bold text-gray-800">Pedidos</h1>
+            <div className="flex flex-col gap-2 w-full">
+                <h1 className="text-2xl font-bold text-gray-800">Ordenes</h1>
+                <Separator />
+            </div>
             <OrderSection />
         </div>
     )

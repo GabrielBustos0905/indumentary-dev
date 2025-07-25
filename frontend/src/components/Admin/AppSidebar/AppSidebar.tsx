@@ -11,6 +11,8 @@ import { data } from "./AppSidebar.data"
 import { NavMain } from "./NavMain"
 import { TeamSwitcher } from "./TeamSwitcher"
 import { NavProjects } from "./NavProjects"
+import { SidebarUser } from "@/components/SidebarUser"
+import { AuthProvider } from "@/contexts"
 
 // This is sample data.
 
@@ -25,8 +27,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <NavProjects projects={data.projects} />
             </SidebarContent>
             <SidebarFooter>
-                {/* <NavUser /> */}
-                Logout
+                <AuthProvider>
+                    <SidebarUser />
+                </AuthProvider>
             </SidebarFooter>
             <SidebarRail />
         </Sidebar>

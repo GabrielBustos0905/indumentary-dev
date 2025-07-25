@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { fetchProductTypes } from "@/services/product-type.service";
 import Link from "next/link";
-import { UserNav } from "../UserNav";
+import { SidebarUser } from "@/components/SidebarUser";
 
 export async function MenuMobile() {
     const types = await fetchProductTypes()
@@ -61,7 +61,7 @@ export async function MenuMobile() {
                                 </AccordionItem>
                             </Accordion>
                         </div>
-                        <UserNav />
+                        <SidebarUser />
                     </div>
                 </DialogContent>
             </Dialog>

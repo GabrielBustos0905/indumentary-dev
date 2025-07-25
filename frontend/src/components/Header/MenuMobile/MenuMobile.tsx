@@ -1,14 +1,20 @@
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Heart, Home, Menu, Shirt } from "lucide-react";
+import { Heart, Home, LayoutDashboard, Menu, Shirt } from "lucide-react";
 import { ShoppingCart } from "../ShoppingCart";
 import { Separator } from "@/components/ui/separator";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { fetchProductTypes } from "@/services/product-type.service";
 import Link from "next/link";
 import { SidebarUser } from "@/components/SidebarUser";
+import { UserType } from "@/types/user";
 
-export async function MenuMobile() {
+interface MenuMobileProps {
+    userType?: UserType
+}
+
+export async function MenuMobile(props: MenuMobileProps) {
     const types = await fetchProductTypes()
+    const { userType } = props;
 
     return (
         <nav className="flex gap-4 md:hidden">
@@ -23,6 +29,14 @@ export async function MenuMobile() {
                         <div className="flex flex-col">
                             <DialogTitle>Menu</DialogTitle>
                             <Separator className="mt-1 mb-6" />
+                            {
+                                userType === "ADMIN" && (
+                                    <div className="flex gap-2 items-center hover:translate-x-1.5 hover:duration-150 transition-all  cursor-pointer">
+                                        <LayoutDashboard className="w-5 h-5" />
+                                        <Link href="/admin/dashboard" className="text-md font-medium">Dashboard Admin</Link>
+                                    </div>
+                                )
+                            }
                             <div className="flex gap-2 items-center hover:translate-x-1.5 hover:duration-150 transition-all  cursor-pointer">
                                 <Home className="w-5 h-5" />
                                 <Link href="/" className="text-md font-medium">Inicio</Link>

@@ -5,10 +5,13 @@ import { UserNav } from "./UserNav"
 import { ShoppingCart } from "./ShoppingCart"
 import { MenuMobile } from "./MenuMobile"
 import { Heart } from "lucide-react"
+import { useAuth } from "@/contexts"
 
 const montserrat = Dancing_Script({ subsets: ["latin"], weight: ["400"] })
 
 export function Header() {
+    const { user } = useAuth()
+
     return (
         <header className="flex items-center justify-between py-4 px-6 mx-auto">
             {/* Logo */}
@@ -29,7 +32,7 @@ export function Header() {
             </div>
 
             {/* Botón hamburguesa solo en mobile */}
-            <MenuMobile />
+            <MenuMobile userType={user?.userType} />
         </header>
     )
 }

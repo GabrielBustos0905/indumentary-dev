@@ -27,7 +27,7 @@ export default function AdminLayout({
                 <ProtectRoute allowedRoles={['ADMIN']}>
                     <SidebarProvider>
                         <AppSidebar />
-                        <div className="w-screen flex">
+                        <div className="w-screen">
                             <SidebarInset>
                                 <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
                                     <div className="flex items-center gap-2 px-4">
@@ -36,7 +36,7 @@ export default function AdminLayout({
                                     </div>
                                 </header>
                             </SidebarInset>
-                            <main className="w-full mt-8">
+                            <main className="w-full mt-4 px-6">
                                 {children}
                                 <Toaster />
                             </main>

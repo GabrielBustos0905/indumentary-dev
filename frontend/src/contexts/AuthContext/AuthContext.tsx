@@ -1,4 +1,3 @@
-// context/AuthContext.tsx
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
@@ -10,12 +9,14 @@ type AuthContextType = {
     user: User | null
     isLoading: boolean
     logout: () => Promise<void>
+    refetchUser: () => Promise<void> // ✅ nueva función
 }
 
 const AuthContext = createContext<AuthContextType>({
     user: null,
     isLoading: true,
     logout: async () => { },
+    refetchUser: async () => { },
 })
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -23,13 +24,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [isLoading, setIsLoading] = useState(true)
     const router = useRouter()
 
-    useEffect(() => {
-        async function loadUser() {
-            const res = await getUserProfile()
-            setUser(res)
-            setIsLoading(false)
-        }
+    const loadUser = async () => {
+        const res = await getUserProfile()
+        setUser(res)
+        setIsLoading(false)
+    }
 
+    useEffect(() => {
         loadUser()
     }, [])
 
@@ -47,8 +48,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }
 
+    const refetchUser = async () => {
+        setIsLoading(true)
+        await loadUser()
+    }
+
     return (
-        <AuthContext.Provider value={{ user, isLoading, logout }}>
+        <AuthContext.Provider value={{ user, isLoading, logout, refetchUser }}>
             {children}
         </AuthContext.Provider>
     )

@@ -13,9 +13,12 @@ import { Button } from "@/components/ui/button"
 import { useState, useTransition } from "react"
 import { login } from "@/actions/login"
 import { useRouter } from "next/navigation"
+import { useAuth } from "@/contexts"
 
 export function LoginForm() {
-    const [isPending, startTransition] = useTransition();
+    const { refetchUser } = useAuth()
+
+    const [isPending] = useTransition();
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
     const router = useRouter()
@@ -28,16 +31,17 @@ export function LoginForm() {
         }
     });
 
-    const onSubmit = (values: z.infer<typeof loginSchema>) => {
-        startTransition(() => {
-            login(values)
-                .then((data) => {
-                    setError(data.error);
-                    setSuccess(data.success)
-                })
-        })
-        if (!error) router.push("/")
+    const onSubmit = async (values: z.infer<typeof loginSchema>) => {
+        const data = await login(values) // esta es la server action
+        setError(data.error)
+        setSuccess(data.success)
+
+        if (!data.error) {
+            await refetchUser()
+            router.push("/")
+        }
     }
+
 
     return (
         <CardWrapper

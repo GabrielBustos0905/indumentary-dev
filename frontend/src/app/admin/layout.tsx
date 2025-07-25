@@ -33,6 +33,7 @@ export default function AdminLayout({
                                     <div className="flex items-center gap-2 px-4">
                                         <SidebarTrigger className="-ml-1" />
                                         <Separator orientation="vertical" className="mr-2 h-4" />
+                                        <h1 className="text-lg font-medium hidden sm:block">Panel de Administración</h1>
                                     </div>
                                 </header>
                             </SidebarInset>

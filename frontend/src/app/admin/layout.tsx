@@ -33,11 +33,11 @@ export default function AdminLayout({
                                     <div className="flex items-center gap-2 px-4">
                                         <SidebarTrigger className="-ml-1" />
                                         <Separator orientation="vertical" className="mr-2 h-4" />
-                                        <h1 className="text-lg font-medium hidden sm:block">Panel de Administración</h1>
+                                        <h1 className="text-lg font-medium">Panel de Administración</h1>
                                     </div>
                                 </header>
                             </SidebarInset>
-                            <main className="w-full mt-4 px-6">
+                            <main className="w-full mt-2 md:mt-4 px-6">
                                 {children}
                                 <Toaster />
                             </main>

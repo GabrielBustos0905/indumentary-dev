@@ -5,9 +5,9 @@ import { protect } from '../middlewares/auth.middleware'
 const router = Router()
 
 router.get('/', protect(['ADMIN']), getAllOrders)
-router.post('/', protect(['ADMIN']), createOrder)
-router.get('/:id', protect(['ADMIN']), getOrderById)
+router.post('/', protect(), createOrder)
+router.get('/:id', protect(), getOrderById)
 router.delete('/:id', protect(['ADMIN']), deleteOrder)
-router.put('/:id', protect(['ADMIN']), updateOrderStatus)
+router.put('/:id', protect(), updateOrderStatus)
 
 export default router

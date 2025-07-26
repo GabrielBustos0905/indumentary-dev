@@ -10,7 +10,7 @@ interface OrderItemData {
 }
 
 interface Item {
-  productId: string
+  product_id: string
   size: string
   quantity: number
 }
@@ -83,7 +83,7 @@ export const paymentWebhook = async (req: Request, res: Response): Promise<any> 
     const orderItemsData: OrderItemData[] = []
 
     for (const item of items) {
-      const product = await prisma.product.findUnique({ where: { id: item.productId } })
+      const product = await prisma.product.findUnique({ where: { id: item.product_id } })
       if (product == null) throw new Error('Producto no encontrado')
 
       const unitPrice = product.offer != null
@@ -112,7 +112,7 @@ export const paymentWebhook = async (req: Request, res: Response): Promise<any> 
       await Promise.all(
         items.map(async item =>
           await tx.product.update({
-            where: { id: item.productId },
+            where: { id: item.product_id },
             data: {
               stock: { decrement: item.quantity }
             }

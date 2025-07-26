@@ -46,12 +46,12 @@ export const createPreference = async (req: Request, res: Response): Promise<any
         items
       },
       back_urls: {
-        success: 'https://tu-sitio.com/success',
-        failure: 'https://tu-sitio.com/failure',
-        pending: 'https://tu-sitio.com/pending'
+        success: 'https://indumentary-dev.vercel.app/success',
+        failure: 'https://indumentary-dev.vercel.app/failure',
+        pending: 'https://indumentary-dev.vercel.app/pending'
       },
       auto_return: 'approved',
-      notification_url: 'https://tu-dominio.com/api/webhook'
+      notification_url: 'https://indumentary-dev.onrender.com/payments/webhook'
     } as any)
 
     return res.status(200).json({ init_point: preference.body.init_point })

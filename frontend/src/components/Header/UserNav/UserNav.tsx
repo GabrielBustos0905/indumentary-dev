@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 import { useAuth } from "@/contexts";
 import Link from "next/link";
-import { User } from "lucide-react";
+import { LayoutDashboard, LogOut, User } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 export function UserNav() {
@@ -32,13 +32,15 @@ export function UserNav() {
                                 user.userType === "ADMIN" && (
                                     <DropdownMenuItem>
                                         <Link href="/admin/dashboard">
+                                            <LayoutDashboard className="mr-2 h-4 w-4" />
                                             Dashboard
                                         </Link>
                                     </DropdownMenuItem>
                                 )
                             }
-                            <DropdownMenuItem>
-                                <button onClick={logout}>Logout</button>
+                            <DropdownMenuItem onClick={logout}>
+                                <LogOut className="mr-2 h-4 w-4" />
+                                Cerrar sesión
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>

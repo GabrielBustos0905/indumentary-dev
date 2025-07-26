@@ -1,6 +1,6 @@
 'use client'
 
-import { User, LogOut, ChevronDown, Loader2 } from 'lucide-react'
+import { User, LogOut, ChevronDown, Loader2, LayoutDashboard } from 'lucide-react'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -52,6 +52,7 @@ export function SidebarUser() {
                                     user.userType === "ADMIN" && (
                                         <DropdownMenuItem>
                                             <Link href="/admin/dashboard">
+                                                <LayoutDashboard className="mr-2 h-4 w-4" />
                                                 Dashboard
                                             </Link>
                                         </DropdownMenuItem>

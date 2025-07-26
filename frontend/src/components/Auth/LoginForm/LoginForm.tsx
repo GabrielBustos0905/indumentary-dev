@@ -12,7 +12,7 @@ import { FormSuccess } from "../FormSuccess"
 import { Button } from "@/components/ui/button"
 import { useState, useTransition } from "react"
 import { login } from "@/actions/login"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts"
 
 export function LoginForm() {
@@ -22,8 +22,6 @@ export function LoginForm() {
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
     const router = useRouter();
-    const searchParams = useSearchParams()
-    const redirectPath = searchParams.get("redirect") || "/"
 
     const form = useForm<z.infer<typeof loginSchema>>({
         resolver: zodResolver(loginSchema),
@@ -40,7 +38,7 @@ export function LoginForm() {
 
         if (!data.error) {
             await refetchUser()
-            router.push(redirectPath)
+            router.push("/")
         }
     }
 

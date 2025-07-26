@@ -22,8 +22,8 @@ export function ProtectRoute({
             const user = await getUserProfile()
 
             if (!user) {
-                const currentPath = window.location.pathname
-                router.replace(`/auth/login?redirect=${encodeURIComponent(currentPath)}`)
+                router.replace('/auth/login')
+                return
             }
 
             if (!allowedRoles.includes(user.userType)) {

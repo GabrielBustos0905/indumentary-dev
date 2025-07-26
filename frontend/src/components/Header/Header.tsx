@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link"
 import { MenuList } from "./MenuList"
 import { Dancing_Script } from "next/font/google"
@@ -7,12 +5,10 @@ import { UserNav } from "./UserNav"
 import { ShoppingCart } from "./ShoppingCart"
 import { MenuMobile } from "./MenuMobile"
 import { Heart } from "lucide-react"
-import { useAuth } from "@/contexts"
 
 const montserrat = Dancing_Script({ subsets: ["latin"], weight: ["400"] })
 
 export function Header() {
-    const { user } = useAuth()
 
     return (
         <header className="flex items-center justify-between py-4 px-6 mx-auto">
@@ -34,7 +30,7 @@ export function Header() {
             </div>
 
             {/* Botón hamburguesa solo en mobile */}
-            <MenuMobile userType={user?.userType} />
+            <MenuMobile />
         </header>
     )
 }

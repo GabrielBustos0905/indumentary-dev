@@ -72,7 +72,7 @@ export const paymentWebhook = async (req: Request, res: Response): Promise<any> 
   try {
     const payment = await mercadopago.payment.findById(Number(paymentId))
     if (payment.body.status !== 'approved') return res.status(200).send('Pago no aprobado')
-
+    console.log({ metadata: payment.body.metadata })
     const { userId } = payment.body.metadata
     const items = payment.body.metadata.items as Item[]
     const user = await prisma.user.findUnique({ where: { id: userId } })

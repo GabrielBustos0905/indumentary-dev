@@ -12,10 +12,10 @@ export function CartContent() {
 
     return (
         <div>
-            <ul className="flex flex-col gap-4 h-[400px] items-center mt-8 overflow-auto scrollbar-thin scrollbar-track-gray-500">
+            <ul className="flex flex-col gap-4 h-[300px] items-center mt-8 overflow-auto scrollbar-thin scrollbar-track-gray-500">
                 {
                     items.map((item) => (
-                        <li key={`${item.productId}-${item.size}`} className="flex w-[400px] pt-1 justify-between">
+                        <li key={`${item.productId}-${item.size}`} className="flex w-[330px] pt-1 justify-between">
                             <div className="flex gap-4">
                                 <img
                                     src={item.imageUrl}

@@ -14,7 +14,7 @@ export default async function CatalogoPage({
     if (products.data.length === 0) return <Loader />;
 
     return (
-        <div>
+        <div className="w-full flex justify-center">
             <section>
                 <ProductsGrid products={products.data} />
             </section>

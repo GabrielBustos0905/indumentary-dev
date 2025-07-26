@@ -8,7 +8,7 @@ export default function CatalogoLayout({ children }: { children: React.ReactNode
     return (
         <div className="my-4 px-5 md:px-12">
             <Suspense fallback={<div>Cargando navegación...</div>}>
-                <div className="flex items-center md:justify-between">
+                <div className="flex w-full justify-between">
                     <CatalogBreadcrumb />
                     <SideNavbarMobile />
                 </div>

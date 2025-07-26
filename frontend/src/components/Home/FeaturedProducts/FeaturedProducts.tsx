@@ -12,16 +12,16 @@ export async function FeaturedProducts() {
                 <CarouselContent>
                     {
                         data.length > 0 ? data.map((product) => (
-                            <CarouselItem key={product.id} className="basis-1/2 lg:basis-1/4 group">
-                                <div className="p-1 m-2">
+                            <CarouselItem key={product.id} className="md:basis-1/2 lg:basis-1/4 group">
+                                <div className="p-1 m-2 flex justify-center">
                                     <ProductCard product={product} />
                                 </div>
                             </CarouselItem>
                         )) : <></>
                     }
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="hidden lg:flex" />
+                <CarouselNext className="hidden lg:flex" />
             </Carousel>
         </div>
     )

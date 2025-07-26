@@ -72,7 +72,7 @@ export const paymentWebhook = async (req: Request, res: Response): Promise<any> 
   try {
     const payment = await mercadopago.payment.findById(Number(paymentId))
     if (payment.body.status !== 'approved') return res.status(200).send('Pago no aprobado')
-    console.log({ metadata: payment.body.metadata })
+    console.log({ items: payment.body.metadata.items })
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const { user_id } = payment.body.metadata
     const items = payment.body.metadata.items as Item[]

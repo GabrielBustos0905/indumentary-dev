@@ -51,7 +51,7 @@ export function SidebarUser() {
                                 {
                                     user.userType === "ADMIN" && (
                                         <DropdownMenuItem>
-                                            <Link href="/admin/dashboard">
+                                            <Link href="/admin/dashboard" className="flex items-center">
                                                 <LayoutDashboard className="mr-2 h-4 w-4" />
                                                 Dashboard
                                             </Link>

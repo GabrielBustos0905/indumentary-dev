@@ -1,6 +1,6 @@
 // app/catalogo/layout.tsx
 import { CatalogBreadcrumb, SideNavbar } from "@/components/Catalogo";
-import { SideNavbarMobile } from "@/components/Catalogo/SideNavbarMobile/SideNavbarMobile";
+import { SideNavbarMobile } from "@/components/Catalogo/SideNavbarMobile";
 import { Separator } from "@/components/ui/separator";
 import { Suspense } from "react";
 

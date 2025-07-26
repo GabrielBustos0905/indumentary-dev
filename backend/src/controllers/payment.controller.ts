@@ -73,9 +73,10 @@ export const paymentWebhook = async (req: Request, res: Response): Promise<any> 
     const payment = await mercadopago.payment.findById(Number(paymentId))
     if (payment.body.status !== 'approved') return res.status(200).send('Pago no aprobado')
     console.log({ metadata: payment.body.metadata })
-    const { userId } = payment.body.metadata
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { user_id } = payment.body.metadata
     const items = payment.body.metadata.items as Item[]
-    const user = await prisma.user.findUnique({ where: { id: userId } })
+    const user = await prisma.user.findUnique({ where: { id: user_id } })
     if (user == null) return res.status(404).send('Usuario no encontrado')
 
     let total = 0
@@ -119,9 +120,14 @@ export const paymentWebhook = async (req: Request, res: Response): Promise<any> 
         )
       )
 
+      if (user_id == null || items == null) {
+        console.error('Faltan datos en metadata:', payment.body.metadata)
+        return res.status(400).send('Datos insuficientes para procesar el pago')
+      }
+
       await tx.order.create({
         data: {
-          userId,
+          userId: user_id,
           total,
           status: 'PAID',
           items: {

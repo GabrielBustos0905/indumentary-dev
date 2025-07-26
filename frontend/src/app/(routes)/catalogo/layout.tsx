@@ -1,5 +1,6 @@
 // app/catalogo/layout.tsx
 import { CatalogBreadcrumb, SideNavbar } from "@/components/Catalogo";
+import { SideNavbarMobile } from "@/components/Catalogo/SideNavbarMobile/SideNavbarMobile";
 import { Separator } from "@/components/ui/separator";
 import { Suspense } from "react";
 
@@ -7,7 +8,10 @@ export default function CatalogoLayout({ children }: { children: React.ReactNode
     return (
         <div className="my-4 px-5 md:px-12">
             <Suspense fallback={<div>Cargando navegación...</div>}>
-                <CatalogBreadcrumb />
+                <div className="flex items-center md:justify-between">
+                    <CatalogBreadcrumb />
+                    <SideNavbarMobile />
+                </div>
             </Suspense>
             <Separator />
             <div className="mt-4 flex md:justify-between gap-4">

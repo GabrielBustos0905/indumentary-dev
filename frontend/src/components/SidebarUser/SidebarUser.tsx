@@ -48,6 +48,15 @@ export function SidebarUser() {
                                     <LogOut className="mr-2 h-4 w-4" />
                                     Cerrar sesión
                                 </DropdownMenuItem>
+                                {
+                                    user.userType === "ADMIN" && (
+                                        <DropdownMenuItem>
+                                            <Link href="/admin/dashboard">
+                                                Dashboard
+                                            </Link>
+                                        </DropdownMenuItem>
+                                    )
+                                }
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </div>

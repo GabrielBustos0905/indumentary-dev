@@ -28,6 +28,15 @@ export function UserNav() {
                             <DropdownMenuItem>
                                 <p className="text-md font-medium">{user.userType}</p>
                             </DropdownMenuItem>
+                            {
+                                user.userType === "ADMIN" && (
+                                    <DropdownMenuItem>
+                                        <Link href="/admin/dashboard">
+                                            Dashboard
+                                        </Link>
+                                    </DropdownMenuItem>
+                                )
+                            }
                             <DropdownMenuItem>
                                 <button onClick={logout}>Logout</button>
                             </DropdownMenuItem>

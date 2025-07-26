@@ -47,6 +47,10 @@ export const data = {
                     title: "Catalogo",
                     url: "/catalogo",
                 },
+                {
+                    title: "Dashboard",
+                    url: "/admin/dashboard"
+                }
             ],
         },
         {

@@ -5,7 +5,7 @@ interface ItemsOrder {
 }
 
 export const paidOrder = async (items: ItemsOrder[]) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/payments/create-preference`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/payments/preference`, {
     method: 'POST',
     credentials: 'include', // si usás cookies para auth
     headers: {

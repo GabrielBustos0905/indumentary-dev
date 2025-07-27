@@ -62,7 +62,7 @@ export const createPreference = async (req: Request, res: Response): Promise<any
 }
 
 export const paymentWebhook = async (req: Request, res: Response): Promise<any> => {
-  console.log('Webhook recibido')
+  // console.log('Webhook recibido')
   const type = req.body?.type ?? req.query?.type
   const paymentId = req.body?.data?.id ?? req.query?.['data.id']
 
@@ -72,7 +72,7 @@ export const paymentWebhook = async (req: Request, res: Response): Promise<any> 
   try {
     const payment = await mercadopago.payment.findById(Number(paymentId))
     if (payment.body.status !== 'approved') return res.status(200).send('Pago no aprobado')
-    console.log({ items: payment.body.metadata.items })
+    // console.log({ items: payment.body.metadata.items })
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const { user_id } = payment.body.metadata
     const items = payment.body.metadata.items as Item[]

@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useCartStore } from "@/hooks/use-cart"
 import { formatPrice } from "@/lib/format-price"
 import { Trash2 } from "lucide-react"
+import { CheckoutButton } from "./CheckoutButton";
 
 export function CartContent() {
     const { items, removeItem } = useCartStore();
@@ -44,9 +44,7 @@ export function CartContent() {
                     <p>Precio Total</p>
                     <p>{formatPrice(totalPrice)}</p>
                 </div>
-                <div className="flex items-center justify-center w-full mt-3">
-                    <Button className="w-full" onClick={() => alert("Comprado")}>Comprar</Button>
-                </div>
+                <CheckoutButton />
             </div>
         </div>
     )

@@ -2,6 +2,7 @@
 
 import { paidOrder } from '@/actions/paid-order'
 import { Button } from '@/components/ui/button'
+import { useAuth } from '@/contexts'
 import { useCartStore } from '@/hooks/use-cart'
 import { useState, useTransition } from 'react'
 
@@ -10,10 +11,14 @@ export function CheckoutButton() {
     const [error, setError] = useState<string | null>(null)
 
     const { items } = useCartStore()
+    const { user } = useAuth()
 
     const handleCheckout = () => {
         startTransition(async () => {
             try {
+                if (!user) {
+                    setError("Loguearse antes de comprar!")
+                }
                 const initPoint = await paidOrder(items)
                 window.location.href = initPoint // Redirige a MercadoPago
             } catch (err) {
@@ -24,7 +29,7 @@ export function CheckoutButton() {
     }
 
     return (
-        <div className="flex items-center justify-center w-full mt-3">
+        <div className="flex flex-col items-center justify-center w-full mt-3">
             <Button
                 onClick={handleCheckout}
                 disabled={isPending}

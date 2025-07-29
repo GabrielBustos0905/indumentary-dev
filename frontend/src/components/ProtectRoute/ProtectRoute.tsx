@@ -26,7 +26,7 @@ export function ProtectRoute({
                 return
             }
 
-            if (allowedRoles === "loged") {
+            if (user && allowedRoles === "loged") {
                 router.replace("/")
                 return
             }

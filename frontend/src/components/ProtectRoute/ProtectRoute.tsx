@@ -9,7 +9,7 @@ import { UserType } from '@/types/user'
 interface ProtectRouteProps {
     children: React.ReactNode
     allowedRoles: UserType[] | "loged"
-    redirectIfLogged?: boolean // nuevo prop opcional
+    redirectIfLogged?: boolean
 }
 
 export function ProtectRoute({
@@ -25,20 +25,25 @@ export function ProtectRoute({
             const user = await getUserProfile()
 
             if (!user) {
-                // Si no está logueado y no es ruta auth, redirige a login
                 if (!redirectIfLogged) {
                     router.replace('/auth/login')
+                    return
                 }
+                // Usuario no logueado, ruta de auth, puede seguir
+                setIsLoading(false)
                 return
             }
 
-            // Si está logueado y queremos evitar acceso a rutas de auth
             if (user && redirectIfLogged) {
                 router.replace('/')
                 return
             }
 
-            if (!redirectIfLogged && allowedRoles !== 'loged' && !allowedRoles.includes(user.userType)) {
+            if (
+                !redirectIfLogged &&
+                allowedRoles !== 'loged' &&
+                !allowedRoles.includes(user.userType)
+            ) {
                 router.replace('/unauthorized')
                 return
             }
@@ -47,8 +52,7 @@ export function ProtectRoute({
         }
 
         checkUser()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [allowedRoles, redirectIfLogged, router])
 
     if (isLoading) return <Loader />
 

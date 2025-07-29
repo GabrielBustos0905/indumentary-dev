@@ -12,7 +12,7 @@ export function ProtectRoute({
     allowedRoles,
 }: {
     children: React.ReactNode
-    allowedRoles: UserType[]
+    allowedRoles: UserType[] | "loged"
 }) {
     const [isLoading, setIsLoading] = useState(true)
     const router = useRouter()
@@ -23,6 +23,11 @@ export function ProtectRoute({
 
             if (!user) {
                 router.replace('/auth/login')
+                return
+            }
+
+            if (allowedRoles === "loged") {
+                router.replace("/")
                 return
             }
 

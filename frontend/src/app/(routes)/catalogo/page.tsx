@@ -1,4 +1,4 @@
-import { ProductsGrid } from "@/components/Catalogo";
+import { ProductPagination, ProductsGrid } from "@/components/Catalogo";
 import { Loader } from "@/components/Loader";
 import { fetchProducts } from "@/services/product.service";
 
@@ -17,6 +17,7 @@ export default async function CatalogoPage({
         <div className="w-full flex justify-center">
             <section>
                 <ProductsGrid products={products.data} />
+                <ProductPagination page={products.page} totalPages={products.perPage} />
             </section>
         </div>
     );

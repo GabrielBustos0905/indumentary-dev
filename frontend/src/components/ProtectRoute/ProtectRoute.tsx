@@ -1,4 +1,3 @@
-// components/ProtectRoute.tsx
 'use client'
 
 import { useEffect, useState } from 'react'
@@ -7,13 +6,17 @@ import { getUserProfile } from '@/lib/user-profile'
 import { Loader } from '../Loader'
 import { UserType } from '@/types/user'
 
+interface ProtectRouteProps {
+    children: React.ReactNode
+    allowedRoles: UserType[] | "loged"
+    redirectIfLogged?: boolean // nuevo prop opcional
+}
+
 export function ProtectRoute({
     children,
     allowedRoles,
-}: {
-    children: React.ReactNode
-    allowedRoles: UserType[] | "loged"
-}) {
+    redirectIfLogged = false,
+}: ProtectRouteProps) {
     const [isLoading, setIsLoading] = useState(true)
     const router = useRouter()
 
@@ -22,16 +25,20 @@ export function ProtectRoute({
             const user = await getUserProfile()
 
             if (!user) {
-                router.replace('/auth/login')
+                // Si no está logueado y no es ruta auth, redirige a login
+                if (!redirectIfLogged) {
+                    router.replace('/auth/login')
+                }
                 return
             }
 
-            if (user && allowedRoles === "loged") {
-                router.replace("/")
+            // Si está logueado y queremos evitar acceso a rutas de auth
+            if (user && redirectIfLogged) {
+                router.replace('/')
                 return
             }
 
-            if (!allowedRoles.includes(user.userType)) {
+            if (!redirectIfLogged && allowedRoles !== 'loged' && !allowedRoles.includes(user.userType)) {
                 router.replace('/unauthorized')
                 return
             }

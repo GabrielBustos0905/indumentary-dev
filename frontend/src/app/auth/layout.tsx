@@ -17,7 +17,7 @@ export default function AuthLayout({
     return (
         <html lang="en">
             <body>
-                <ProtectRoute allowedRoles="loged">
+                <ProtectRoute allowedRoles="loged" redirectIfLogged>
                     <AuthProvider>
                         <div className="flex h-screen">
                             <div className="w-full md:w-1/2 flex items-center justify-center p-6">

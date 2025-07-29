@@ -17,7 +17,7 @@ export default async function CatalogoPage({
         <div className="w-full flex justify-center">
             <section>
                 <ProductsGrid products={products.data} />
-                <ProductPagination page={products.page} totalPages={products.perPage} />
+                <ProductPagination page={products.page} totalPages={products.totalPages} />
             </section>
         </div>
     );

@@ -3,6 +3,7 @@ import { ProductTable } from "./ProductTable";
 import { ProductFilters } from "./ProductFilters";
 import { ProductSearch } from "@/components/ProductSearch";
 import { CreateProduct } from "./ProductForm";
+import { PaginationProduct } from "./PaginationProduct";
 
 export function ProductSection() {
     return (
@@ -13,6 +14,7 @@ export function ProductSection() {
                 <CreateProduct />
             </div>
             <ProductTable />
+            <PaginationProduct />
         </ProductProvider>
     )
 }

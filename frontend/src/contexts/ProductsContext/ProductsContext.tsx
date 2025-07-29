@@ -6,15 +6,19 @@ import {
     useState,
     useEffect,
     ReactNode,
-    useCallback
+    useCallback,
 } from "react"
 import {
     fetchProducts,
     createProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
 } from "@/services/product.service"
-import { Product, ProductCreateInput, ProductUpdateInput } from "@/types/product"
+import {
+    Product,
+    ProductCreateInput,
+    ProductUpdateInput,
+} from "@/types/product"
 import { ProductType } from "@/types/product-type"
 import { fetchProductTypes } from "@/services/product-type.service"
 
@@ -29,6 +33,7 @@ interface ProductContextType {
     error: string | null
     filters: Record<string, unknown>
     setFilters: (filters: Record<string, unknown>) => void
+    changePage: (page: number) => void
     fetchAllProducts: () => Promise<void>
     create: (data: ProductCreateInput) => Promise<void>
     update: (id: string, data: ProductUpdateInput) => Promise<void>
@@ -48,7 +53,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     const [error, setError] = useState<string | null>(null)
     const [filters, setFilters] = useState<Record<string, unknown>>({
         page: 1,
-        perPage: 12
+        perPage: 12,
     })
     const [types, setTypes] = useState<ProductType[]>([])
 
@@ -95,6 +100,13 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
         }
     }, [])
 
+    const changePage = (newPage: number) => {
+        setFilters((prev) => ({
+            ...prev,
+            page: newPage,
+        }))
+    }
+
     useEffect(() => {
         fetchAllProducts()
         fetchTypes()
@@ -113,11 +125,12 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
                 error,
                 filters,
                 setFilters,
+                changePage,
                 fetchAllProducts,
                 create,
                 update,
                 remove,
-                types
+                types,
             }}
         >
             {children}

@@ -8,7 +8,7 @@ export async function ChooseCategory() {
 
     return (
         <div className="w-screen md:max-w-7xl py-4 mx-auto sm:py-16 sm:px-24">
-            <h3 className="px-6 pb-4 text-3xl sm:pb-8 uppercase">Eliga la categoria que desee</h3>
+            <h3 className="px-6 pb-4 text-3xl sm:pb-8 uppercase">Elija la categoria que desee</h3>
             <div className="grid grid-cols-2 gap-2 md:flex md:gap-1">
                 {
                     categories?.map((category: ProductType) => (
